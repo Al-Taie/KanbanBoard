@@ -27,6 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 put(TITLE, "TEST")
                 put(DESCRIPTION, "TEST")
                 put(STATUS, "TEST")
+                put(DATE, "2021-09-05")
             }
             databaseHelper.writableDatabase.insert(TABLE_NAME, null, newEntry)
         }

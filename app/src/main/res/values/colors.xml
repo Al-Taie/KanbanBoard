@@ -10,4 +10,16 @@
     <color name="purple_medium">#E3E5FF</color>
     <color name="purple_text">#696CFE</color>
     <color name="purple_background">#F6F7FF</color>
+
+
+    <color name="violet">#A6AEF4</color>
+    <color name="purple">#7077C7</color>
+    <color name="grey">#BBBCD1</color>
+    <color name="green">#73CCAE</color>
+    <color name="mintGreen">#E2F7F0</color>
+    <color name="darkGrey">#676D87</color>
+    <color name="blue">#5863F2</color>
+    <color name="babyPink">#FEE5E4</color>
+    <color name="pink">#E69DA0</color>
+    <color name="lightGrey">#F6F7FF</color>
 </resources>

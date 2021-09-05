@@ -1,4 +1,4 @@
-package com.watermelon.kanbanboard.ui.inProgress
+package com.watermelon.kanbanboard.ui.in_progress
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

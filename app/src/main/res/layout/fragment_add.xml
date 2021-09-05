@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/add_new_task_headline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Add A New Task"
+        android:textColor="@color/purple"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="Title"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_new_task_headline">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/properties"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PROPERTIES"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/grey"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/assign_to_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:hint="Assign To"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/properties"
+        app:startIconDrawable="@drawable/ic_user">
+
+        <AutoCompleteTextView
+            android:id="@+id/AssignTo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <View
+        android:id="@+id/label_view"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/properties_background"
+        app:layout_constraintEnd_toEndOf="@id/assign_to_layout"
+        app:layout_constraintStart_toStartOf="@+id/assign_to_layout"
+        app:layout_constraintTop_toBottomOf="@id/assign_to_layout" />
+
+    <TextView
+        android:id="@+id/label_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:textStyle="bold"
+        android:text="Label"
+        android:textColor="@color/darkGrey"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/label_view"
+        app:layout_constraintStart_toEndOf="@+id/label_icon"
+        app:layout_constraintTop_toTopOf="@+id/label_view" />
+
+    <ImageView
+        android:id="@+id/label_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:rotation="180"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_label"
+        app:layout_constraintEnd_toStartOf="@id/label_text"
+        app:layout_constraintBottom_toBottomOf="@+id/label_view"
+        app:layout_constraintStart_toStartOf="@+id/label_view"
+        app:layout_constraintTop_toTopOf="@+id/label_view" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/label_view"
+        app:layout_constraintEnd_toEndOf="@+id/label_view"
+        app:layout_constraintTop_toTopOf="@+id/label_view"
+        app:singleLine="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/design_chip"
+            style="@style/designChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Design"
+            android:textColor="@color/pink"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/code_chip"
+            style="@style/codeChipStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Code"
+            android:textColor="@color/green"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <View
+        android:id="@+id/date_view"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/properties_background"
+        app:layout_constraintEnd_toEndOf="@id/assign_to_layout"
+        app:layout_constraintStart_toStartOf="@+id/assign_to_layout"
+        app:layout_constraintTop_toBottomOf="@id/label_view" />
+
+    <TextView
+        android:id="@+id/date_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:textStyle="bold"
+        android:text="Due Date"
+        android:textColor="@color/darkGrey"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/date_view"
+        app:layout_constraintStart_toEndOf="@+id/date_icon"
+        app:layout_constraintTop_toTopOf="@+id/date_view" />
+
+    <ImageView
+        android:id="@+id/date_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:src="@drawable/ic_calendar"
+        app:layout_constraintEnd_toStartOf="@id/date_text"
+        app:layout_constraintBottom_toBottomOf="@+id/date_view"
+        app:layout_constraintStart_toStartOf="@+id/date_view"
+        app:layout_constraintTop_toTopOf="@+id/date_view" />
+
+    <ImageButton
+        android:id="@+id/pick_date_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/lightGrey"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_arrow"
+        app:layout_constraintBottom_toBottomOf="@+id/date_view"
+        app:layout_constraintEnd_toEndOf="@+id/date_view"
+        app:layout_constraintTop_toTopOf="@+id/date_view" />
+
+    <TextView
+        android:id="@+id/date_displayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5/8/2021"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/date_view"
+        app:layout_constraintEnd_toStartOf="@+id/pick_date_button"
+        app:layout_constraintTop_toTopOf="@+id/date_view" />
+    <Button
+        android:id="@+id/add_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        tools:text="Add"
+        android:textSize="18sp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/descriptionInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:hint="Describe your task here.."
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date_view">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

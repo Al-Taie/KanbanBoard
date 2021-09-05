@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import com.google.android.material.tabs.TabLayoutMediator
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.databinding.ActivityMainBinding
+import com.watermelon.kanbanboard.ui.adapter.ItemAdapter
 import com.watermelon.kanbanboard.ui.base.BaseActivity
 import com.watermelon.kanbanboard.ui.done.DoneFragment
 import com.watermelon.kanbanboard.ui.home.HomeFragment
@@ -37,7 +38,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         }
     }
 
-    override fun callBack() {}
+    override fun callBack() {
+    }
 
     override val inflate: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate

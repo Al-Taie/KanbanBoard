@@ -7,6 +7,7 @@ import com.watermelon.kanbanboard.databinding.ActivityMainBinding
 import com.watermelon.kanbanboard.ui.base.BaseActivity
 import com.watermelon.kanbanboard.ui.home.HomeFragment
 import com.watermelon.kanbanboard.ui.home.ViewPagerAdapter
+import com.watermelon.kanbanboard.ui.in_progress.InProgressFragment
 import com.watermelon.kanbanboard.ui.todo.TodoFragment
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
@@ -21,6 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         val tabTitles = listOf("Home", "ToDo", "In Progress", "Done")
         val tabIcons = listOf(
             R.drawable.ic_home,
+            R.drawable.ic_checklist,
             R.drawable.ic_in_progress,
             R.drawable.ic_done
         ).map(this::getDrawable)
@@ -40,7 +42,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         get() = ActivityMainBinding::inflate
 
     private fun initViewPager() {
-        val fragmentsList = listOf(HomeFragment(), TodoFragment())
+        val fragmentsList = listOf(
+            HomeFragment(),
+            TodoFragment(),
+            InProgressFragment(),
+            InProgressFragment()
+        )
         val adapter = ViewPagerAdapter(this, fragmentsList = fragmentsList)
         binding.viewPager.adapter = adapter
     }

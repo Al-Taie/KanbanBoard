@@ -4,4 +4,13 @@
     <string name="to_do">To Do</string>
     <string name="add_card">Add Card</string>
     <string name="in_porgress">in Porgress</string>
+
+    <string-array name="members_names">
+        <item>Ahmed Mones</item>
+        <item>Ahmed Yusef</item>
+        <item>Ammar Thaaer</item>
+        <item>Karrar Mohammed</item>
+        <item>Zahraa Zahir</item>
+        <item>Zainab Mahmood</item>
+    </string-array>
 </resources>

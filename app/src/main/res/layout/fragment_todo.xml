@@ -29,43 +29,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/todo_text" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/button_add"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:padding="16dp"
+        android:elevation="8dp"
         android:backgroundTint="@color/purple_medium"
-        android:elevation="8dp"
-        app:cardCornerRadius="16dp"
-        app:layout_constraintTop_toBottomOf="@id/todo_recyclerview" />
-
-    <TextView
-        android:id="@+id/add_card_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="8dp"
-        android:text="@string/add_card"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="@color/purple_text"
-        app:layout_constraintBottom_toBottomOf="@id/button_add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/add_icon"
-        app:layout_constraintTop_toTopOf="@id/button_add" />
-
-    <ImageView
-        android:id="@+id/add_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="8dp"
-        android:src="@drawable/ic_baseline_add_24"
-        app:layout_constraintBottom_toBottomOf="@id/button_add"
-        app:layout_constraintEnd_toStartOf="@+id/add_card_text"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/button_add" />
-
-
+        app:srcCompat="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

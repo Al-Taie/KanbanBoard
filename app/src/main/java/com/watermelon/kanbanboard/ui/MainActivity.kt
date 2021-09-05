@@ -5,6 +5,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.databinding.ActivityMainBinding
 import com.watermelon.kanbanboard.ui.adapter.ItemAdapter
+import com.watermelon.kanbanboard.ui.add.AddFragment
 import com.watermelon.kanbanboard.ui.base.BaseActivity
 import com.watermelon.kanbanboard.ui.done.DoneFragment
 import com.watermelon.kanbanboard.ui.home.HomeFragment
@@ -26,6 +27,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             R.drawable.ic_home,
             R.drawable.ic_checklist,
             R.drawable.ic_in_progress,
+            R.drawable.ic_done,
             R.drawable.ic_done
         ).map(this::getDrawable)
 
@@ -49,7 +51,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             HomeFragment(),
             TodoFragment(),
             InProgressFragment(),
-            DoneFragment()
+            DoneFragment(),
+            AddFragment()
         )
         val adapter = ViewPagerAdapter(this, fragmentsList = fragmentsList)
         binding.viewPager.adapter = adapter

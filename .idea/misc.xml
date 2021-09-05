@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Team_watermelon_projects/KanbanBoard/app/src/main/res/drawable/shape_task_description_border.xml" value="0.2703125" />
+        <entry key="..\:/Team_watermelon_projects/KanbanBoard/app/src/main/res/drawable/shape_task_highlight.xml" value="0.2703125" />
         <entry key="..\:/Team_watermelon_projects/KanbanBoard/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Team_watermelon_projects/KanbanBoard/app/src/main/res/layout/item_task_card.xml" value="0.4" />
       </map>

@@ -37,7 +37,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <!-- Contents from  -->
         <TextView
             android:id="@+id/text_title"
             android:layout_width="match_parent"
@@ -83,61 +82,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Aug 3, 2020"
-            app:layout_constraintTop_toTopOf="@id/view_highlights"
-            app:layout_constraintBottom_toBottomOf="@id/view_highlights"
+            app:layout_constraintTop_toTopOf="@id/text_highlight"
+            app:layout_constraintBottom_toBottomOf="@id/text_highlight"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-        <HorizontalScrollView
-            android:id="@+id/view_highlights"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginEnd="8dp"
+        <TextView
+            android:id="@+id/text_highlight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:scrollbars="none"
+            android:textSize="12sp"
+            android:background="@drawable/shape_task_highlight_border"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"
             app:layout_constraintTop_toBottomOf="@id/image_profile"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/text_deadline">
-
-            <com.google.android.material.chip.ChipGroup
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:singleLine="true">
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:text="Highlight1" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:text="Highlight2" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:text="Highlight3" />
-
-                <com.google.android.material.chip.Chip
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="10sp"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    tools:text="Highlight4" />
-
-            </com.google.android.material.chip.ChipGroup>
-
-        </HorizontalScrollView>
+            tools:text="Design"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/expandable_layout"
@@ -145,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:visibility="visible"
-            app:layout_constraintTop_toBottomOf="@id/view_highlights"
+            app:layout_constraintTop_toBottomOf="@id/text_highlight"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -177,8 +137,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

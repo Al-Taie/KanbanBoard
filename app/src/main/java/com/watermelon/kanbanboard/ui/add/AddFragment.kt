@@ -28,5 +28,10 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
 
     private fun setup() {}
 
-    private fun callBack() {}
+    private fun callBack() {
+        binding.apply {
+            dateView.setOnClickListener { listener.showDatePicker() }
+            pickDateButton.setOnClickListener { listener.showDatePicker() }
+        }
+    }
 }

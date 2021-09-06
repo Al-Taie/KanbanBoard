@@ -10,9 +10,9 @@
         android:id="@+id/add_new_task_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Add A New Task"
+        android:text="Add A New Task"
         android:textColor="@color/purple"
-        android:textSize="24sp"
+        android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
         android:text="PROPERTIES"
         android:layout_marginTop="24dp"
         android:textColor="@color/grey"
-        android:textSize="18sp"
+        android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
@@ -54,7 +54,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="20dp"
         android:hint="Assign To"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -82,11 +82,11 @@
         android:id="@+id/label_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_margin="16dp"
         android:textStyle="bold"
-        android:text="Label"
+        android:text="Status"
         android:textColor="@color/darkGrey"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/label_view"
         app:layout_constraintStart_toEndOf="@+id/label_icon"
         app:layout_constraintTop_toTopOf="@+id/label_view" />
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:rotation="180"
-        android:layout_margin="24dp"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_label"
         app:layout_constraintEnd_toStartOf="@id/label_text"
         app:layout_constraintBottom_toBottomOf="@+id/label_view"
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:text="Design"
             android:textColor="@color/pink"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
         <com.google.android.material.chip.Chip
@@ -129,9 +129,10 @@
             style="@style/codeChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="Code"
             android:textColor="@color/green"
-            android:textSize="16sp"
+            android:textSize="15sp"
             android:textStyle="bold" />
 
     </com.google.android.material.chip.ChipGroup>
@@ -150,11 +151,11 @@
         android:id="@+id/date_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_margin="16dp"
         android:textStyle="bold"
         android:text="Due Date"
         android:textColor="@color/darkGrey"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
         app:layout_constraintStart_toEndOf="@+id/date_icon"
         app:layout_constraintTop_toTopOf="@+id/date_view" />
@@ -163,7 +164,7 @@
         android:id="@+id/date_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="24dp"
+        android:layout_margin="16dp"
         android:src="@drawable/ic_calendar"
         app:layout_constraintEnd_toStartOf="@id/date_text"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
@@ -182,11 +183,11 @@
         app:layout_constraintTop_toTopOf="@+id/date_view" />
 
     <TextView
-        android:id="@+id/date_displayer"
+        android:id="@+id/date_viewer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5/8/2021"
-        android:textSize="16sp"
+        android:text="2021-09-06"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
@@ -196,9 +197,9 @@
         android:id="@+id/add_button"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        tools:text="Add"
+        android:text="Add"
         android:textSize="18sp"
-        android:textAllCaps="false"
+        android:textAllCaps="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -207,18 +208,22 @@
         android:id="@+id/descriptionInputLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:hint="Describe your task here.."
+        app:expandedHintEnabled="true"
         android:inputType="text"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/add_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_view">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:gravity="top"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="text" />
+            android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

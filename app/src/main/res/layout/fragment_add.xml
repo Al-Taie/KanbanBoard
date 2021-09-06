@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp">
@@ -31,6 +30,7 @@
         app:layout_constraintTop_toBottomOf="@id/add_new_task_headline">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="text" />
@@ -41,13 +41,13 @@
         android:id="@+id/properties"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PROPERTIES"
         android:layout_marginTop="24dp"
+        android:text="PROPERTIES"
         android:textColor="@color/grey"
         android:textSize="17sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"/>
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/assign_to_layout"
@@ -62,7 +62,7 @@
         app:startIconDrawable="@drawable/ic_user">
 
         <AutoCompleteTextView
-            android:id="@+id/AssignTo"
+            android:id="@+id/assign_to"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="none" />
@@ -83,10 +83,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:textStyle="bold"
         android:text="Status"
         android:textColor="@color/darkGrey"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/label_view"
         app:layout_constraintStart_toEndOf="@+id/label_icon"
         app:layout_constraintTop_toTopOf="@+id/label_view" />
@@ -95,16 +95,16 @@
         android:id="@+id/label_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:rotation="180"
         android:layout_margin="16dp"
+        android:rotation="180"
         android:src="@drawable/ic_label"
-        app:layout_constraintEnd_toStartOf="@id/label_text"
         app:layout_constraintBottom_toBottomOf="@+id/label_view"
+        app:layout_constraintEnd_toStartOf="@id/label_text"
         app:layout_constraintStart_toStartOf="@+id/label_view"
         app:layout_constraintTop_toTopOf="@+id/label_view" />
 
     <com.google.android.material.chip.ChipGroup
-        android:id="@+id/chipGroup"
+        android:id="@+id/statusChipGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
@@ -152,10 +152,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:textStyle="bold"
         android:text="Due Date"
         android:textColor="@color/darkGrey"
         android:textSize="17sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
         app:layout_constraintStart_toEndOf="@+id/date_icon"
         app:layout_constraintTop_toTopOf="@+id/date_view" />
@@ -166,8 +166,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:src="@drawable/ic_calendar"
-        app:layout_constraintEnd_toStartOf="@id/date_text"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
+        app:layout_constraintEnd_toStartOf="@id/date_text"
         app:layout_constraintStart_toStartOf="@+id/date_view"
         app:layout_constraintTop_toTopOf="@+id/date_view" />
 
@@ -175,8 +175,8 @@
         android:id="@+id/pick_date_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/lightGrey"
         android:layout_marginEnd="16dp"
+        android:background="@color/lightGrey"
         android:src="@drawable/ic_arrow"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
         app:layout_constraintEnd_toEndOf="@+id/date_view"
@@ -186,20 +186,21 @@
         android:id="@+id/date_viewer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
         android:text="2021-09-06"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
         app:layout_constraintEnd_toStartOf="@+id/pick_date_button"
         app:layout_constraintTop_toTopOf="@+id/date_view" />
+
     <Button
         android:id="@+id/add_button"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:text="Add"
-        android:textSize="18sp"
         android:textAllCaps="true"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -210,19 +211,20 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:hint="Describe your task here.."
-        app:expandedHintEnabled="true"
-        android:inputType="text"
         android:layout_marginBottom="20dp"
+        android:hint="Describe your task here.."
+        android:inputType="text"
+        app:expandedHintEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/add_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/date_view">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:gravity="top"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:gravity="top"
             android:inputType="textMultiLine" />
     </com.google.android.material.textfield.TextInputLayout>
 

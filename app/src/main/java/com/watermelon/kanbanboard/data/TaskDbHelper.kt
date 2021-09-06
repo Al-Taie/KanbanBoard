@@ -11,7 +11,8 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
                 "${DB.TITLE} TEXT," +
                 "${DB.DESCRIPTION} TEXT," +
                 "${DB.STATUS} TEXT," +
-                "${DB.DATE} TEXT)"
+                "${DB.DATE} TEXT," +
+                "${DB.EXPANDED} INTEGER)"
         database?.execSQL(sql)
     }
 
@@ -29,5 +30,6 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
         const val DESCRIPTION = "description"
         const val STATUS = "status"
         const val DATE = "date"
+        const val EXPANDED = "expanded"
     }
 }

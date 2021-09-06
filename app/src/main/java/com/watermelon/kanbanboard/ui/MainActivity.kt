@@ -110,7 +110,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
         componentsVisibility(false)
     }
 
-    override fun showDatePicker() {}
+    override fun showDatePicker() {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+        val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
+            .setTitleText("Date Picker")
+            .setSelection(
+                Pair(
+                    MaterialDatePicker.thisMonthInUtcMilliseconds(),
+                    MaterialDatePicker.todayInUtcMilliseconds()
+                ).toAndroidXPair()
+            ).build()
+
+        dateRangePicker.addOnPositiveButtonClickListener {
+            findViewById<TextView>(R.id.date_viewer).text = dateFormat.format(it.first)
+        }
+
+        dateRangePicker.show(supportFragmentManager, "Date Picker")
+    }
 
     override fun onBackPressed() {
         super.onBackPressed()

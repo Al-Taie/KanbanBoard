@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.TaskDbHelper
@@ -30,7 +31,11 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
         return binding.root
     }
 
-    private fun setup() {}
+    private fun setup() {
+        val items = resources.getStringArray(R.array.members_names)
+        val adapter = ArrayAdapter(requireContext(), R.layout.assignto_dropdown_item, items)
+        binding.assignTo.setAdapter(adapter)
+    }
 
     private fun callBack() {
         binding.apply {

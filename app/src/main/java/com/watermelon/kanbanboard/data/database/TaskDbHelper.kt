@@ -34,8 +34,8 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
         val cursor = readableDatabase.rawQuery(sql, arrayOf<String>())
         Toast.makeText(context, cursor.moveToNext().toString(), Toast.LENGTH_LONG).show()
         while (cursor.moveToNext()) {
-//            val task = parseData(cursor)
-//            initData(table = table, task = task)
+            val task = parseData(cursor)
+            initData(table = table, task = task)
         }
     }
 

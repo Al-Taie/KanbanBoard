@@ -1,6 +1,5 @@
 package com.watermelon.kanbanboard.ui.add
 
-import android.content.ContentValues
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,10 +43,7 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
         }
     }
 
-    val newEntry = ContentValues()
-
     private fun addTask() {
-        val dbHelper = context?.let { TaskDbHelper(it) }
         val task: Task
         binding.apply {
             val status = when (statusChipGroup.checkedChipId) {
@@ -64,20 +60,8 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
                 dueDate = dateViewer.text.toString(),
                 expanded = false
             )
-
-            newEntry.apply {
-                put(TaskDbHelper.DB.TITLE, "hello")
-                put(TaskDbHelper.DB.TABLE_NAME, "todo")
-                put(TaskDbHelper.DB.STATUS, "design")
-                put(TaskDbHelper.DB.DESCRIPTION, "test")
-                put(TaskDbHelper.DB.DATE, "2020")
-                put(TaskDbHelper.DB.EXPANDED, 0)
-            }
-
         }
 
-
-        dbHelper?.writableDatabase?.insert(TaskDbHelper.TABLES.TO_DO, null, newEntry)
         DataManager.addTodoTask(task = task)
     }
 

@@ -17,10 +17,11 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
             val sql = "CREATE TABLE $table (" +
                     "${DB.ID} INTEGER PRIMARY KEY," +
                     "${DB.TITLE} TEXT," +
-                    "${DB.TABLE_NAME} TEXT," +
                     "${DB.DESCRIPTION} TEXT," +
+                    "${DB.ASSIGN_TO} TEXT," +
                     "${DB.STATUS} TEXT," +
                     "${DB.DATE} TEXT," +
+                    "${DB.TABLE_NAME} TEXT," +
                     "${DB.EXPANDED} INTEGER)"
             database?.execSQL(sql)
         }
@@ -43,8 +44,10 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
         task.apply {
             newEntry.apply {
                 with(DB) {
+                    put(ID, id)
                     put(TITLE, title)
                     put(DESCRIPTION, description)
+                    put(ASSIGN_TO, assignedTo)
                     put(STATUS, status)
                     put(DATE, dueDate)
                     put(TABLE_NAME, tableName)
@@ -61,7 +64,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
     private fun parseData(cursor: Cursor): Task {
         val task: Task
         cursor.apply {
-            val id = getString(Constant.Index.ID)
+            val id = getInt(Constant.Index.ID)
             val title = getString(Constant.Index.TITLE)
             val tableName = getString(Constant.Index.TABLE_NAME)
             val description = getString(Constant.Index.DESCRIPTION)
@@ -71,6 +74,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
             val expanded = getInt(Constant.Index.EXTENDED).toString().toBoolean()
 
             task = Task(
+                id = id,
                 title = title,
                 tableName = tableName,
                 description = description,
@@ -105,6 +109,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
     }
 
     object DB {
+        const val ASSIGN_TO = "assignTo"
         const val ID = "id"
         const val TITLE = "title"
         const val TABLE_NAME = "tableName"

@@ -1,4 +1,4 @@
-package com.watermelon.kanbanboard.ui.data.domain
+package com.watermelon.kanbanboard.data.domain
 
 data class Task(
     val title: String,

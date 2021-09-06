@@ -1,6 +1,5 @@
 package com.watermelon.kanbanboard.ui
 
-import android.content.ContentValues
 import android.icu.text.SimpleDateFormat
 import android.transition.TransitionManager
 import android.view.LayoutInflater
@@ -12,7 +11,6 @@ import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayoutMediator
 import com.watermelon.kanbanboard.R
-import com.watermelon.kanbanboard.data.TaskDbHelper
 import com.watermelon.kanbanboard.databinding.ActivityMainBinding
 import com.watermelon.kanbanboard.ui.base.BaseActivity
 import com.watermelon.kanbanboard.ui.done.DoneFragment
@@ -24,7 +22,6 @@ import com.watermelon.kanbanboard.ui.todo.TodoFragment
 import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
-    private val databaseHelper by lazy { TaskDbHelper(applicationContext) }
     private val isLargeLayout by lazy { resources.getBoolean(R.bool.large_layout) }
     override val theme = R.style.Theme_KanbanBoard
     private var isDialog = false
@@ -34,9 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
         initTabLayout()
     }
 
-    override fun callBack() {
-        addTask()
-    }
+    override fun callBack() {}
 
     override val inflate: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
@@ -57,21 +52,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
                 if (position != 0)
                     tab.orCreateBadge.number = position
             }.attach()
-        }
-    }
-
-    private fun addTask() {
-        val newEntry = ContentValues()
-
-        with(TaskDbHelper.DB) {
-            newEntry.apply {
-                put(TITLE, "TEST")
-                put(DESCRIPTION, "TEST")
-                put(STATUS, "TEST")
-                put(DATE, "2021-09-05")
-                put(EXPANDED, 0)
-            }
-            databaseHelper.writableDatabase.insert(TABLE_NAME, null, newEntry)
         }
     }
 
@@ -144,4 +124,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
         isDialog = !show
     }
 
+    override fun closeDialog(dialogFragment: DialogFragment) {
+        dialogFragment.dismiss()
+        componentsVisibility(true)
+    }
 }

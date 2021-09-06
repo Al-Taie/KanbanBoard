@@ -2,15 +2,20 @@ package com.watermelon.kanbanboard.ui
 
 import android.icu.text.SimpleDateFormat
 import android.transition.TransitionManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.util.toAndroidXPair
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.tabs.TabLayoutMediator
 import com.watermelon.kanbanboard.R
+import com.watermelon.kanbanboard.data.DataManager
+import com.watermelon.kanbanboard.data.database.TaskDbHelper
+import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.ActivityMainBinding
 import com.watermelon.kanbanboard.ui.base.BaseActivity
 import com.watermelon.kanbanboard.ui.done.DoneFragment
@@ -22,6 +27,7 @@ import com.watermelon.kanbanboard.ui.todo.TodoFragment
 import java.util.*
 
 class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
+    private lateinit var dbHelper: TaskDbHelper
     private val isLargeLayout by lazy { resources.getBoolean(R.bool.large_layout) }
     override val theme = R.style.Theme_KanbanBoard
     private var isDialog = false
@@ -29,12 +35,24 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
     override fun setup() {
         initViewPager()
         initTabLayout()
+        dbHelper = TaskDbHelper(applicationContext)
+       TaskDbHelper.TABLES.list.map { dbHelper.read(it) }
     }
 
     override fun callBack() {}
 
     override val inflate: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
+
+    override fun onDestroy() {
+//        TaskDbHelper.TABLES.list.map {
+//            dbHelper.readableDatabase.delete(it, null, null)
+//        }
+        DataManager.todoList.map { dbHelper.write(it) }
+        DataManager.inProgressList.map { dbHelper.write(it) }
+        DataManager.doneList.map { dbHelper.write(it) }
+        super.onDestroy()
+    }
 
     private fun initTabLayout() {
         val tabTitles = listOf("Home", "ToDo", "In Progress", "Done")

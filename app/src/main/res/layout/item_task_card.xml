@@ -83,13 +83,13 @@
             android:id="@+id/text_deadline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/text_highlight"
+            app:layout_constraintBottom_toBottomOf="@id/text_status"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_highlight"
+            app:layout_constraintTop_toTopOf="@id/text_status"
             tools:text="Aug 3, 2020" />
 
         <TextView
-            android:id="@+id/text_highlight"
+            android:id="@+id/text_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -109,10 +109,10 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_highlight">
+            app:layout_constraintTop_toBottomOf="@id/text_status">
 
             <TextView
-                android:id="@+id/text_task_description"
+                android:id="@+id/text_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"

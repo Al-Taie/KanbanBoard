@@ -6,5 +6,7 @@ data class Task(
     val assignedTo: String,
     val dueDate: String,
     val status: String,
+    val tableName: String,
     val expanded: Boolean = false
+
 )

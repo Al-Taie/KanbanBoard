@@ -7,13 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.watermelon.kanbanboard.R
-import com.watermelon.kanbanboard.data.TaskDbHelper
+import com.watermelon.kanbanboard.data.DataManager
+import com.watermelon.kanbanboard.data.database.TaskDbHelper
+import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.FragmentAddBinding
 import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
 
 
 class AddFragment(private val listener: CustomDialogFragment) : DialogFragment() {
-    private val databaseHelper by lazy { context?.let { TaskDbHelper(it) } }
     val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentAddBinding
         get() = FragmentAddBinding::inflate
 
@@ -43,27 +44,41 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
         }
     }
 
+    val newEntry = ContentValues()
+
     private fun addTask() {
-        val newEntry = ContentValues()
+        val dbHelper = context?.let { TaskDbHelper(it) }
+        val task: Task
+        binding.apply {
+            val status = when (statusChipGroup.checkedChipId) {
+                R.id.code_chip -> CODE
+                else -> DESIGN
+            }
 
-        with(TaskDbHelper.DB) {
+            task = Task(
+                title = title.text.toString(),
+                tableName = TaskDbHelper.TABLES.TO_DO,
+                description = description.text.toString(),
+                status = status,
+                assignedTo = assignTo.text.toString(),
+                dueDate = dateViewer.text.toString(),
+                expanded = false
+            )
+
             newEntry.apply {
-                binding.apply {
-                    put(TITLE, title.text.toString())
-                    put(DESCRIPTION, description.text.toString())
+                put(TaskDbHelper.DB.TITLE, "hello")
+                put(TaskDbHelper.DB.TABLE_NAME, "todo")
+                put(TaskDbHelper.DB.STATUS, "design")
+                put(TaskDbHelper.DB.DESCRIPTION, "test")
+                put(TaskDbHelper.DB.DATE, "2020")
+                put(TaskDbHelper.DB.EXPANDED, 0)
+            }
 
-                    when (statusChipGroup.checkedChipId) {
-                        R.id.code_chip -> put(STATUS, CODE)
-                        R.id.design_chip -> put(STATUS, DESIGN)
-                    }
-                    put(DATE, dateViewer.text.toString())
-                    put(EXPANDED, false)
-                }
-            }
-            databaseHelper?.apply {
-                writableDatabase.insert(TABLE_NAME, null, newEntry)
-            }
         }
+
+
+        dbHelper?.writableDatabase?.insert(TaskDbHelper.TABLES.TO_DO, null, newEntry)
+        DataManager.addTodoTask(task = task)
     }
 
     companion object Status {

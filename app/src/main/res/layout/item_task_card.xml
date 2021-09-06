@@ -132,12 +132,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:background="#FFF"
+                android:text="Description"
                 android:paddingHorizontal="4dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Description" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

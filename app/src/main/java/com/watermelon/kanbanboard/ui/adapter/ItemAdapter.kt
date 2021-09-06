@@ -20,7 +20,7 @@ class ItemAdapter(private val list: List<String>): RecyclerView.Adapter<ItemAdap
             textHighlight.text = "Design"
             textPersonName.text = "name"
             textDeadline.text = "Date"
-            viewDescription.text = "Description"
+            textTaskDescription.text = "Description"
         }
     }
     override fun getItemCount() = list.size

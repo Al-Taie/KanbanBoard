@@ -35,8 +35,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
         val cursor = readableDatabase.rawQuery(sql, arrayOf<String>())
         Toast.makeText(context, cursor.moveToNext().toString(), Toast.LENGTH_LONG).show()
         while (cursor.moveToNext()) {
-            val task = parseData(cursor)
-            initData(table = table, task = task)
+            parseData(cursor)
         }
     }
 
@@ -63,7 +62,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
 
     }
 
-    private fun parseData(cursor: Cursor): Task {
+    private fun parseData(cursor: Cursor) {
         val task: Task
         cursor.apply {
             val id = getInt(Constant.Index.ID)
@@ -87,7 +86,6 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
             )
             initData(table = tableName,task = task)
         }
-        return task
     }
 
     private fun initData(table: String, task: Task) {

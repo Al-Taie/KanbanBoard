@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.DataManager
@@ -41,6 +42,10 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
                 listener.closeDialog(this@AddFragment)
             }
         }
+
+        val items = resources.getStringArray(R.array.members_names)
+        val adapter = ArrayAdapter(requireContext(), R.layout.assignto_dropdown_item, items)
+        binding.assignTo.setAdapter(adapter)
     }
 
     private fun addTask() {

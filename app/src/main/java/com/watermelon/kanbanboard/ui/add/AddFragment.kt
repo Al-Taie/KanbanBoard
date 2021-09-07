@@ -1,11 +1,9 @@
 package com.watermelon.kanbanboard.ui.add
 
-import android.content.ContentValues
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.DataManager
@@ -32,11 +30,7 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
         return binding.root
     }
 
-    private fun setup() {
-        val items = resources.getStringArray(R.array.members_names)
-        val adapter = ArrayAdapter(requireContext(), R.layout.assignto_dropdown_item, items)
-        binding.assignTo.setAdapter(adapter)
-    }
+    private fun setup() {}
 
     private fun callBack() {
         binding.apply {
@@ -49,10 +43,7 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
         }
     }
 
-    val newEntry = ContentValues()
-
     private fun addTask() {
-        val dbHelper = context?.let { TaskDbHelper(it) }
         val task: Task
         binding.apply {
             val status = when (statusChipGroup.checkedChipId) {
@@ -61,7 +52,6 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
             }
 
             task = Task(
-                id = id,
                 title = title.text.toString(),
                 tableName = TaskDbHelper.TABLES.TO_DO,
                 description = description.text.toString(),
@@ -70,20 +60,8 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
                 dueDate = dateViewer.text.toString(),
                 expanded = false
             )
-
-            newEntry.apply {
-                put(TaskDbHelper.DB.TITLE, "hello")
-                put(TaskDbHelper.DB.TABLE_NAME, "todo")
-                put(TaskDbHelper.DB.STATUS, "design")
-                put(TaskDbHelper.DB.DESCRIPTION, "test")
-                put(TaskDbHelper.DB.DATE, "2020")
-                put(TaskDbHelper.DB.EXPANDED, 0)
-            }
-
         }
 
-
-        dbHelper?.writableDatabase?.insert(TaskDbHelper.TABLES.TO_DO, null, newEntry)
         DataManager.addTodoTask(task = task)
     }
 

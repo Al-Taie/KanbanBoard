@@ -1,7 +1,7 @@
 package com.watermelon.kanbanboard.data.domain
 
 data class Task(
-    val id: Int,
+    val id: Int = 0,
     val title: String,
     val description: String,
     val assignedTo: String,

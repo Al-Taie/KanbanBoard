@@ -45,9 +45,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
         get() = ActivityMainBinding::inflate
 
     override fun onDestroy() {
-//        TaskDbHelper.TABLES.list.map {
-//            dbHelper.readableDatabase.delete(it, null, null)
-//        }
+        TaskDbHelper.TABLES.list.map {
+            dbHelper.readableDatabase.delete(it, null, null)
+        }
         DataManager.todoList.map { dbHelper.write(it) }
         DataManager.inProgressList.map { dbHelper.write(it) }
         DataManager.doneList.map { dbHelper.write(it) }

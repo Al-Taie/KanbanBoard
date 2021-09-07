@@ -16,7 +16,6 @@ import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
 
 
 class AddFragment(private val listener: CustomDialogFragment) : DialogFragment() {
-    private val databaseHelper by lazy { context?.let { TaskDbHelper(it) } }
     val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentAddBinding
         get() = FragmentAddBinding::inflate
 
@@ -62,6 +61,7 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
             }
 
             task = Task(
+                id = id,
                 title = title.text.toString(),
                 tableName = TaskDbHelper.TABLES.TO_DO,
                 description = description.text.toString(),

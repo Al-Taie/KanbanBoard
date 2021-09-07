@@ -9,4 +9,5 @@ data class Task(
     val status: String,
     val tableName: String,
     val expanded: Boolean = false
+
 )

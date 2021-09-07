@@ -44,7 +44,8 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
         task.apply {
             newEntry.apply {
                 with(DB) {
-                    put(ID, id)
+                    if (id != 0)
+                        put(ID, id)
                     put(TITLE, title)
                     put(DESCRIPTION, description)
                     put(ASSIGN_TO, assignedTo)

@@ -10,12 +10,13 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.watermelon.kanbanboard.R
+import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.ItemTaskCardBinding
 import com.watermelon.kanbanboard.util.CustomSpinnerAdapter
 import com.watermelon.kanbanboard.util.CustomSpinnerItem
 import com.watermelon.kanbanboard.util.getCustomItemList
 
-class ItemAdapter(private val list: List<String>): RecyclerView.Adapter<ItemAdapter.ItemViewHolder>(){
+class TaskAdapter(private val list: List<Task>): RecyclerView.Adapter<TaskAdapter.ItemViewHolder>(){
     lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -28,10 +29,10 @@ class ItemAdapter(private val list: List<String>): RecyclerView.Adapter<ItemAdap
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentData = list[position]
         holder.binding.apply{
-            textHighlight.text = "Design"
+            textTitle.text = "Design"
             textPersonName.text = "name"
             textDeadline.text = "Date"
-            textTaskDescription.text = "Description"
+            textDescription.text = "Description"
             initSpinner(spinnerTaskCard)
         }
     }

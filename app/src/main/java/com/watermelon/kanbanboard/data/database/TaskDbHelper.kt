@@ -61,7 +61,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
     private fun parseData(cursor: Cursor): Task {
         val task: Task
         cursor.apply {
-            val id = getString(Constant.Index.ID)
+            val id = getInt(Constant.Index.ID)
             val title = getString(Constant.Index.TITLE)
             val tableName = getString(Constant.Index.TABLE_NAME)
             val description = getString(Constant.Index.DESCRIPTION)
@@ -71,6 +71,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
             val expanded = getInt(Constant.Index.EXTENDED).toString().toBoolean()
 
             task = Task(
+                id = id,
                 title = title,
                 tableName = tableName,
                 description = description,

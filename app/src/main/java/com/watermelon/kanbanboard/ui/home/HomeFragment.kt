@@ -1,12 +1,14 @@
 package com.watermelon.kanbanboard.ui.home
 
+import android.graphics.ColorSpace
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.DecelerateInterpolator
 import androidx.fragment.app.Fragment
-import com.razerdp.widget.animatedpieview.AnimatedPieView
-import com.razerdp.widget.animatedpieview.AnimatedPieViewConfig
-import com.razerdp.widget.animatedpieview.data.SimplePieInfo
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
+import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
+import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
+import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
+import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.databinding.FragmentHomeBinding
 import com.watermelon.kanbanboard.ui.base.BaseFragment
 
@@ -19,51 +21,28 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun setup() {}
 
     override fun callBack() {
-        val chart = binding.homePieChart
-        initPieChart(chart)
+        initPieChart()
     }
 
-    private fun initPieChart(chart: AnimatedPieView) {
-        val config = AnimatedPieViewConfig()
-        config.apply {
-            startAngle(-40f)
-            duration(1800)
-            drawText(true)
-            canTouch(true)
-            textSize(36F)
-            textMargin(3)
-            splitAngle(1.5F)
-            interpolator(DecelerateInterpolator())
-            autoSize(false)
-            pieRadiusRatio(1F)
-            animOnTouch(true)
-            focusAlphaType(AnimatedPieViewConfig.FOCUS_WITH_ALPHA_REV)
-            focusAlpha(100)
-            floatShadowRadius(4F)
-            floatExpandSize(4F)
-
-            addData(
-                SimplePieInfo(
-                    5.0,
-                    15493974, "To Do" //15493974
-                )
+    private fun initPieChart() {
+        val aaChartModel : AAChartModel = AAChartModel()
+            .chartType(AAChartType.Column)
+            .dataLabelsEnabled(true)
+            .legendEnabled(false)
+            .titleStyle(AAStyle().color("#008000"))
+            .backgroundColor(ColorSpace.Rgb.ILLUMINANT_A)
+            .categories(arrayOf("ToDo","In Progress","Done"))
+            .series(arrayOf(
+                AASeriesElement()
+                    .enableMouseTracking(true)
+                    .data(arrayOf(4,6,8)),
             )
-            addData(
-                SimplePieInfo(
-                    6.0,
-                    16761172, "in Porgress" //16761172
-                )
             )
-            addData(
-                SimplePieInfo(
-                    7.0,
-                    4699036, "Done"//4699036
-                )
-            )
-        }
-
-        chart.applyConfig(config)
-        chart.start()
+            .animationDuration(3000)
+       binding.homePieChart.apply {
+        aa_drawChartWithChartModel(aaChartModel)
+        aa_updateChartWithOptions(aaChartModel,true)
+       }
     }
 
     override val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentHomeBinding

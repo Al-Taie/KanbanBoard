@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.watermelon.kanbanboard.R
-import com.watermelon.kanbanboard.data.TaskDbHelper
+import com.watermelon.kanbanboard.data.DataManager
+import com.watermelon.kanbanboard.data.database.TaskDbHelper
+import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.FragmentAddBinding
 import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
 

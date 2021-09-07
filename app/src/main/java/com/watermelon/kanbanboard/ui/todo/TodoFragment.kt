@@ -22,7 +22,7 @@ class TodoFragment(private val listener: CustomDialogFragment) : BaseFragment<Fr
         binding.addButton.setOnClickListener { listener.showDialog(AddFragment(listener, this)) }
     }
 
-    override fun update(list: List<Task>) {
-        binding.todoRecycler.adapter = TaskAdapter(list)
+    override fun update() {
+        binding.todoRecycler.adapter = TaskAdapter(DataManager.todoList)
     }
 }

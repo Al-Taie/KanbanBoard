@@ -6,12 +6,11 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
-import android.widget.Toast
 import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.util.Constant
 
-class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
+class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     override fun onCreate(database: SQLiteDatabase?) {
         TABLES.list.forEach { table ->
             val sql = "CREATE TABLE $table (" +
@@ -87,7 +86,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
                 dueDate = dueDate,
                 expanded = expanded
             )
-            initData(table = tableName,task = task)
+            initData(table = tableName, task = task)
         }
     }
 

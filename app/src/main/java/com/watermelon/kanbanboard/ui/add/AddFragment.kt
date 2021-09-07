@@ -70,7 +70,7 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
             )
         }
         dbHelper.write(task)
-        updateListener.update(DataManager.todoList)
+        updateListener.update()
     }
 
     companion object Status {

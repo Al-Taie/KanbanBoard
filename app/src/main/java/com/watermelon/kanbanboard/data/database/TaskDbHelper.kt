@@ -33,7 +33,10 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
         Log.v("READ_FUNCTION", "begin read")
         val sql = "SELECT * FROM $table"
         val cursor = readableDatabase.rawQuery(sql, arrayOf<String>())
-        Toast.makeText(context, cursor.moveToNext().toString(), Toast.LENGTH_LONG).show()
+
+        if (cursor.moveToFirst())
+            parseData(cursor)
+
         while (cursor.moveToNext()) {
             parseData(cursor)
         }
@@ -89,7 +92,6 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
     }
 
     private fun initData(table: String, task: Task) {
-        Log.v("READ_TRACE", "$table - ${task.assignedTo}")
         when (table) {
             TABLES.TO_DO -> DataManager.addTodoTask(task)
             TABLES.IN_PROGRESS -> DataManager.addInProgressTask(task)

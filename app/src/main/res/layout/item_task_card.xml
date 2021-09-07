@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.App.CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="12dp">
@@ -36,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="-6dp"
             android:minHeight="42dp"
+            android:background="@drawable/task_card_spinner_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -131,12 +133,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:background="#FFF"
+                android:text="Description"
                 android:paddingHorizontal="4dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Description" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

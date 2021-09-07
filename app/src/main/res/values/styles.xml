@@ -33,4 +33,12 @@
         <item name="checkedIconTint">@color/pink</item>
         <item name="rippleColor">@color/pink</item>
     </style>
+
+    <style name="cutShape" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamilyTopLeft">cut</item>
+        <item name="cornerFamilyBottomRight">cut</item>
+        <item name="cornerSizeTopLeft">10dp</item>
+        <item name="cornerSizeBottomRight">10dp</item>
+    </style>
+
 </resources>

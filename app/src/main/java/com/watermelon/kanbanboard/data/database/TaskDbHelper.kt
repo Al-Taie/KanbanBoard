@@ -30,7 +30,8 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {}
 
     fun read(table: String) {
-        val sql = "SELECT * FROM ${TABLES.TO_DO}"
+        Log.v("READ_FUNCTION", "begin read")
+        val sql = "SELECT * FROM $table"
         val cursor = readableDatabase.rawQuery(sql, arrayOf<String>())
         Toast.makeText(context, cursor.moveToNext().toString(), Toast.LENGTH_LONG).show()
         while (cursor.moveToNext()) {
@@ -42,6 +43,7 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
     fun write(task: Task) {
         val newEntry = ContentValues()
         task.apply {
+            initData(table = tableName, task)
             newEntry.apply {
                 with(DB) {
                     if (id != 0)
@@ -55,11 +57,10 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
                     put(EXPANDED, expanded)
                 }
             }
-            Log.v("MAIN_ACTIVITY", "INSIDE WRITE")
-            Log.v("MAIN_ACTIVITY", tableName)
+
             writableDatabase.insert(tableName, null, newEntry)
         }
-        Log.v("MAIN_ACTIVITY", "END WRITE")
+
     }
 
     private fun parseData(cursor: Cursor): Task {
@@ -84,12 +85,13 @@ class TaskDbHelper(val context: Context) : SQLiteOpenHelper(context, DB_NAME, nu
                 dueDate = dueDate,
                 expanded = expanded
             )
+            initData(table = tableName,task = task)
         }
         return task
     }
 
     private fun initData(table: String, task: Task) {
-        Log.v("MAIN_ACTIVITY", "INSIDE INIT_DATA")
+        Log.v("READ_TRACE", "$table - ${task.assignedTo}")
         when (table) {
             TABLES.TO_DO -> DataManager.addTodoTask(task)
             TABLES.IN_PROGRESS -> DataManager.addInProgressTask(task)

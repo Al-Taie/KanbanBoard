@@ -44,15 +44,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
     override val inflate: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
 
-    override fun onDestroy() {
-        TaskDbHelper.TABLES.list.map {
-            dbHelper.readableDatabase.delete(it, null, null)
-        }
-        DataManager.todoList.map { dbHelper.write(it) }
-        DataManager.inProgressList.map { dbHelper.write(it) }
-        DataManager.doneList.map { dbHelper.write(it) }
-        super.onDestroy()
-    }
+
 
     private fun initTabLayout() {
         val tabTitles = listOf("Home", "ToDo", "In Progress", "Done")

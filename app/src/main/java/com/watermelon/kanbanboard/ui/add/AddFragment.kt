@@ -12,9 +12,10 @@ import com.watermelon.kanbanboard.data.database.TaskDbHelper
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.FragmentAddBinding
 import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
+import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 
 
-class AddFragment(private val listener: CustomDialogFragment) : DialogFragment() {
+class AddFragment(private val listener: CustomDialogFragment, private val updateListener: UpdateAdapter) : DialogFragment() {
     val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentAddBinding
         get() = FragmentAddBinding::inflate
 
@@ -31,7 +32,8 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
         return binding.root
     }
 
-    private fun setup() {}
+    private fun setup() {
+    }
 
     private fun callBack() {
         binding.apply {
@@ -50,6 +52,7 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
 
     private fun addTask() {
         val task: Task
+        val dbHelper = TaskDbHelper(requireContext())
         binding.apply {
             val status = when (statusChipGroup.checkedChipId) {
                 R.id.code_chip -> CODE
@@ -66,8 +69,8 @@ class AddFragment(private val listener: CustomDialogFragment) : DialogFragment()
                 expanded = false
             )
         }
-
-        DataManager.addTodoTask(task = task)
+        dbHelper.write(task)
+        updateListener.update(DataManager.todoList)
     }
 
     companion object Status {

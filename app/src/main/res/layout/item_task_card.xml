@@ -33,11 +33,11 @@
 
         <Spinner
             android:id="@+id/spinner_task_card"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="-6dp"
-            android:minHeight="42dp"
             android:background="@drawable/task_card_spinner_background"
+            android:minHeight="42dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -8,10 +8,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_toLeftOf="@id/custom_spinner_icon">
+        android:layout_toStartOf="@id/custom_spinner_icon">
 
         <ImageView
             android:id="@+id/icon_spinner_layout"
+            android:visibility="gone"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:paddingVertical="5dp"
@@ -21,6 +22,7 @@
 
         <TextView
             android:id="@+id/text_spinner_layout"
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
@@ -30,14 +32,13 @@
             tools:text="To Do" />
 
     </LinearLayout>
-    
+
     <ImageView
         android:id="@+id/custom_spinner_icon"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/ic_baseline_more_vert_24"
+        android:layout_width="15dp"
+        android:layout_height="25dp"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_baseline_more_vert_24" />
 
 </RelativeLayout>

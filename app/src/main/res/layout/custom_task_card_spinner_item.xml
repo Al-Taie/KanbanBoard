@@ -9,8 +9,7 @@
         android:id="@+id/icon_spinner_item"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:paddingVertical="5dp"
-        android:paddingHorizontal="10dp"
+        android:padding="10dp"
         android:scaleType="centerCrop"
         tools:src="@drawable/ic_todo" />
 
@@ -19,8 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:padding="10dp"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         tools:text="To Do" />
 

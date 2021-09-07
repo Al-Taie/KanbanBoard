@@ -23,20 +23,21 @@ import com.watermelon.kanbanboard.ui.home.HomeFragment
 import com.watermelon.kanbanboard.ui.home.ViewPagerAdapter
 import com.watermelon.kanbanboard.ui.in_progress.InProgressFragment
 import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
+import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout
 import com.watermelon.kanbanboard.ui.todo.TodoFragment
 import java.util.*
 
-class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
+class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, UpdateTabLayout {
     private lateinit var dbHelper: TaskDbHelper
     private val isLargeLayout by lazy { resources.getBoolean(R.bool.large_layout) }
     override val theme = R.style.Theme_KanbanBoard
     private var isDialog = false
 
     override fun setup() {
-        initViewPager()
-        initTabLayout()
         dbHelper = TaskDbHelper(applicationContext)
        TaskDbHelper.TABLES.list.map { dbHelper.read(it) }
+        initViewPager()
+        initTabLayout()
     }
 
     override fun callBack() {}
@@ -47,20 +48,25 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
 
 
     private fun initTabLayout() {
-        val tabTitles = listOf("Home", "ToDo", "In Progress", "Done")
         val tabIcons = listOf(
             R.drawable.ic_home,
             R.drawable.ic_checklist,
             R.drawable.ic_in_progress,
             R.drawable.ic_done
         ).map(this::getDrawable)
-
         binding.apply {
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
 //                tab.text = tabTitles[position]
                 tab.icon = tabIcons[position]
-                if (position != 0)
-                    tab.orCreateBadge.number = position
+                if (position != 0 && position != 3) {
+                    val value = when (position) {
+                        1 -> DataManager.todoList.size
+                        2 -> DataManager.inProgressList.size
+                        else -> DataManager.doneList.size
+                    }
+                    if(value != 0)
+                        tab.orCreateBadge.number = value
+                }
             }.attach()
         }
     }
@@ -68,7 +74,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
     private fun initViewPager() {
         val fragmentsList = listOf(
             HomeFragment(),
-            TodoFragment(this),
+            TodoFragment(this,this),
             InProgressFragment(),
             DoneFragment()
         )
@@ -137,5 +143,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment {
     override fun closeDialog(dialogFragment: DialogFragment) {
         dialogFragment.dismiss()
         componentsVisibility(true)
+    }
+
+    override fun update() {
+        initTabLayout()
     }
 }

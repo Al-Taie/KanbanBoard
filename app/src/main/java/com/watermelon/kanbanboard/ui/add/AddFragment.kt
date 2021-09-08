@@ -18,16 +18,17 @@ import com.watermelon.kanbanboard.util.Constant
 import com.watermelon.kanbanboard.util.lastId
 
 
-class AddFragment(private val listener: CustomDialogFragment,
-                  private val updateListener: UpdateAdapter,
-                  private val fragmentType: String,
-                  private val _task: Task?
+class AddFragment(
+    private val listener: CustomDialogFragment,
+    private val updateListener: UpdateAdapter,
+    private val fragmentType: String,
+    private val _task: Task?
 ) : DialogFragment() {
     val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentAddBinding
         get() = FragmentAddBinding::inflate
 
     private lateinit var binding: FragmentAddBinding
-    private lateinit var dbHelper : TaskDbHelper
+    private lateinit var dbHelper: TaskDbHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,14 +43,25 @@ class AddFragment(private val listener: CustomDialogFragment,
 
     private fun setup() {
         dbHelper = TaskDbHelper(requireContext())
+        initAddEdit()
     }
 
     private fun callBack() {
         binding.apply {
             dateView.setOnClickListener { listener.showDatePicker() }
             pickDateButton.setOnClickListener { listener.showDatePicker() }
-            when(fragmentType){
+            exitButton.setOnClickListener { listener.closeDialog(this@AddFragment) }
+        }
 
+        val items = resources.getStringArray(R.array.members_names)
+        val adapter = ArrayAdapter(requireContext(), R.layout.assignto_dropdown_item, items)
+        binding.assignTo.setAdapter(adapter)
+    }
+
+
+    private fun initAddEdit() {
+        binding.apply {
+            when (fragmentType) {
                 Constant.FragmentType.ADD -> {
                     addButton.text = Constant.FragmentType.ADD
                     addNewTaskHeadline.text = Title.ADD
@@ -61,19 +73,15 @@ class AddFragment(private val listener: CustomDialogFragment,
 
                 Constant.FragmentType.EDIT -> {
                     bindTaskData()
-                    addButton.setOnClickListener{
+                    addButton.setOnClickListener {
                         editTask()
                         listener.closeDialog(this@AddFragment)
                     }
                 }
             }
-
         }
-
-        val items = resources.getStringArray(R.array.members_names)
-        val adapter = ArrayAdapter(requireContext(), R.layout.assignto_dropdown_item, items)
-        binding.assignTo.setAdapter(adapter)
     }
+
 
     private fun bindTaskData() {
         binding.apply {
@@ -83,7 +91,7 @@ class AddFragment(private val listener: CustomDialogFragment,
             description.setText(_task?.description)
             assignTo.setText(_task?.assignedTo)
             dateViewer.text = _task?.dueDate
-            when(_task?.status) {
+            when (_task?.status) {
                 Status.CODE -> statusChipGroup.check(R.id.code_chip)
                 else -> statusChipGroup.check(R.id.design_chip)
             }
@@ -119,8 +127,17 @@ class AddFragment(private val listener: CustomDialogFragment,
 
                 }
             }
-            dbHelper.writableDatabase.update(_task?.tableName,newEntry,"id = ?",arrayOf(_task?.id.toString()))
-            DataManager.replaceTask(oldTask = requireNotNull(_task), newTask = editedTask, to = _task.tableName)
+            dbHelper.writableDatabase.update(
+                _task?.tableName,
+                newEntry,
+                "id = ?",
+                arrayOf(_task?.id.toString())
+            )
+            DataManager.replaceTask(
+                oldTask = requireNotNull(_task),
+                newTask = editedTask,
+                to = _task.tableName
+            )
             updateListener.update()
 
         }
@@ -153,10 +170,11 @@ class AddFragment(private val listener: CustomDialogFragment,
     }
 
     companion object
-        object Status {
-            const val DESIGN = "design"
-            const val CODE = "code"
-        }
+    object Status {
+        const val DESIGN = "design"
+        const val CODE = "code"
+    }
+
     object Title {
         const val ADD = "Add new Task"
         const val EDIT = "Edit Task"

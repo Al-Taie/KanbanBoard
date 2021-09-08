@@ -48,7 +48,7 @@ class TaskAdapter(
                 buttonEditTask.setOnClickListener { listener.editTask(this) }
 
                 val spinnerDrawAbles = arrayOf(
-                    R.drawable.ic_todo,
+                    R.drawable.ic_checklist,
                     R.drawable.ic_done,
                     R.drawable.ic_in_progress
                 )

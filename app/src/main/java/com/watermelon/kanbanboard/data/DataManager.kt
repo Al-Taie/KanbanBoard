@@ -89,28 +89,6 @@ object DataManager {
         }
     }
 
-    /**
-     * @param task Task Object
-     * @param to   Table Name
-     * @author     Ahmed Mones
-     * @return     Unit
-     * */
-    fun moveTask(task: Task, to: String) {
-        TABLES.apply {
-            val position = when (task.tableName) {
-                TO_DO -> removeTodoTask(task)
-                IN_PROGRESS -> removeProgressTask(task)
-                else -> removeTask(task)
-            }
-
-            when (to) {
-                TO_DO -> addTodoTask(task = task, index = position)
-                IN_PROGRESS -> addInProgressTask(task = task, index = position)
-                DONE -> addDoneTask(task = task, index = position)
-            }
-        }
-    }
-
     val todoList: List<Task>
         get() = todoTasksList.toList()
 

@@ -23,3 +23,12 @@ fun MutableList<Task>.add(index: Int?, task: Task) {
     else
         this.add(index, task)
 }
+
+/**
+ * return last task database id
+ * @author     Ahmed Mones
+ * @return     Int
+ * */
+fun MutableList<Task>.lastId() : Int {
+    return this.last().id + 1
+}

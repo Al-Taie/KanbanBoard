@@ -10,13 +10,13 @@
         android:id="@+id/add_new_task_headline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="Add A New Task"
         android:textColor="@color/purple"
         android:textSize="23sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Add A New Task" />
 
     <ImageButton
         android:id="@+id/exit_button"
@@ -26,7 +26,8 @@
         android:src="@drawable/ic_exit"
         app:layout_constraintBottom_toBottomOf="@+id/add_new_task_headline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -34,12 +35,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:hint="Title"
-        app:shapeAppearance="@style/cutShape"
+        android:hint="@string/title"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/add_new_task_headline">
+        app:layout_constraintTop_toBottomOf="@id/add_new_task_headline"
+        app:shapeAppearance="@style/cutShape">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/title"
@@ -54,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="PROPERTIES"
+        android:text="@string/properties"
         android:textColor="@color/grey"
         android:textSize="17sp"
         android:textStyle="bold"
@@ -67,18 +68,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:hint="Assign To"
-        app:shapeAppearance="@style/cutShape"
+        android:hint="@string/assign_to"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/properties"
+        app:shapeAppearance="@style/cutShape"
         app:startIconDrawable="@drawable/ic_user">
 
         <AutoCompleteTextView
             android:id="@+id/assign_to"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="none" />
+            android:inputType="none"
+            tools:ignore="LabelFor" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <View
@@ -96,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Status"
+        android:text="@string/status"
         android:textColor="@color/darkGrey"
         android:textSize="17sp"
         android:textStyle="bold"
@@ -114,7 +116,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/label_view"
         app:layout_constraintEnd_toStartOf="@id/label_text"
         app:layout_constraintStart_toStartOf="@+id/label_view"
-        app:layout_constraintTop_toTopOf="@+id/label_view" />
+        app:layout_constraintTop_toTopOf="@+id/label_view"
+        tools:ignore="ContentDescription" />
 
     <com.google.android.material.chip.ChipGroup
         android:id="@+id/statusChipGroup"
@@ -132,7 +135,7 @@
             style="@style/designChipStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Design"
+            android:text="@string/design"
             android:textColor="@color/pink"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -143,7 +146,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Code"
+            android:text="@string/code"
             android:textColor="@color/green"
             android:textSize="15sp"
             android:textStyle="bold" />
@@ -165,7 +168,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Due Date"
+        android:text="@string/due_date"
         android:textColor="@color/darkGrey"
         android:textSize="17sp"
         android:textStyle="bold"
@@ -182,7 +185,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
         app:layout_constraintEnd_toStartOf="@id/date_text"
         app:layout_constraintStart_toStartOf="@+id/date_view"
-        app:layout_constraintTop_toTopOf="@+id/date_view" />
+        app:layout_constraintTop_toTopOf="@+id/date_view"
+        tools:ignore="ContentDescription" />
 
     <ImageButton
         android:id="@+id/pick_date_button"
@@ -193,14 +197,15 @@
         android:src="@drawable/ic_arrow"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
         app:layout_constraintEnd_toEndOf="@+id/date_view"
-        app:layout_constraintTop_toTopOf="@+id/date_view" />
+        app:layout_constraintTop_toTopOf="@+id/date_view"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/date_viewer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="2021-09-06"
+        tools:text="2021-09-06"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/date_view"
@@ -211,12 +216,12 @@
         android:id="@+id/add_button"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
-        tools:text="Add"
         android:textAllCaps="false"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Add" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/descriptionInputLayout"
@@ -225,14 +230,14 @@
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
-        android:hint="Describe your task here.."
-        app:shapeAppearance="@style/cutShape"
+        android:hint="@string/describe_your_task_here"
         android:inputType="text"
         app:expandedHintEnabled="true"
         app:layout_constraintBottom_toTopOf="@id/add_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_view">
+        app:layout_constraintTop_toBottomOf="@id/date_view"
+        app:shapeAppearance="@style/cutShape">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/description"

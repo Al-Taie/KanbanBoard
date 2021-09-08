@@ -1,6 +1,5 @@
 package com.watermelon.kanbanboard.ui.todo
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.watermelon.kanbanboard.data.DataManager
@@ -14,19 +13,29 @@ import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout
 import com.watermelon.kanbanboard.util.Constant
 
-class TodoFragment(private val listener: CustomDialogFragment,
-                   private val updateTabLayoutListener: UpdateTabLayout
-                   ) : BaseFragment<FragmentTodoBinding>(), UpdateAdapter {
+class TodoFragment(
+    private val listener: CustomDialogFragment,
+    private val updateTabLayoutListener: UpdateTabLayout
+) : BaseFragment<FragmentTodoBinding>(), UpdateAdapter {
     override val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentTodoBinding
         get() = FragmentTodoBinding::inflate
 
-    lateinit var adapter: TaskAdapter
+    private lateinit var adapter: TaskAdapter
 
     override fun setup() {}
 
     override fun callBack() {
         updateRecycler()
-        binding.addButton.setOnClickListener { listener.showDialog(AddFragment(listener, this, Constant.FragmentType.ADD, null)) }
+        binding.addButton.setOnClickListener {
+            listener.showDialog(
+                AddFragment(
+                    listener,
+                    this,
+                    Constant.FragmentType.ADD,
+                    null
+                )
+            )
+        }
     }
 
     override fun onResume() {
@@ -44,7 +53,7 @@ class TodoFragment(private val listener: CustomDialogFragment,
     }
 
     private fun updateRecycler() {
-        adapter = TaskAdapter(DataManager.todoList,this, updateTabLayoutListener)
+        adapter = TaskAdapter(DataManager.todoList, this, updateTabLayoutListener)
         binding.todoRecycler.adapter = adapter
     }
 }

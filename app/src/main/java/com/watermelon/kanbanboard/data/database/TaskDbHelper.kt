@@ -63,40 +63,23 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
 
     }
 
-    fun edit(task: Task) {
-        Log.v("EDIT_TITLE","begin edit inside helper = ${task.title}")
 
-        val newEntry = ContentValues().apply {
-            with(DB) {
-                put(TITLE, task.title)
-                put(DESCRIPTION, task.description)
-                put(ASSIGN_TO, task.assignedTo)
-                put(STATUS, task.status)
-                put(DATE, task.dueDate)
-                put(EXPANDED, false)
-
-            }
-        }
-        Log.v("EDIT_TITLE","end edit inside helper = ${task.title}")
-        writableDatabase.update(task.tableName,newEntry,"id = ?",arrayOf(task.id.toString()))
-
-
-
-    }
-
-
-    fun move(task: Task, to : String) {
+    fun move(task: Task, to: String) {
         TABLES.apply {
             when (task.tableName) {
-                TO_DO -> writableDatabase.delete(TO_DO,"id = ?", arrayOf(task.id.toString()))
-                IN_PROGRESS -> writableDatabase.delete(IN_PROGRESS,"id = ?", arrayOf(task.id.toString()))
-                else -> writableDatabase.delete(DONE,"id = ?", arrayOf(task.id.toString()))
+                TO_DO -> writableDatabase.delete(TO_DO, "id = ?", arrayOf(task.id.toString()))
+                IN_PROGRESS -> writableDatabase.delete(
+                    IN_PROGRESS,
+                    "id = ?",
+                    arrayOf(task.id.toString())
+                )
+                else -> writableDatabase.delete(DONE, "id = ?", arrayOf(task.id.toString()))
             }
 
             task.tableName = to
 
-                task.apply {
-                    val newEntry = ContentValues().apply {
+            task.apply {
+                val newEntry = ContentValues().apply {
                     with(DB) {
                         put(TITLE, title)
                         put(DESCRIPTION, description)
@@ -107,11 +90,11 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
                         put(EXPANDED, expanded)
                     }
                 }
-                    when (tableName) {
-                        TO_DO -> writableDatabase.insert(TO_DO,null,newEntry)
-                        IN_PROGRESS -> writableDatabase.insert(IN_PROGRESS,null,newEntry)
-                        else -> writableDatabase.insert(DONE,null,newEntry)
-                    }
+                when (tableName) {
+                    TO_DO -> writableDatabase.insert(TO_DO, null, newEntry)
+                    IN_PROGRESS -> writableDatabase.insert(IN_PROGRESS, null, newEntry)
+                    else -> writableDatabase.insert(DONE, null, newEntry)
+                }
             }
 
         }
@@ -173,5 +156,4 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
         const val DATE = "date"
         const val EXPANDED = "expanded"
     }
-
 }

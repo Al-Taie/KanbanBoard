@@ -14,8 +14,9 @@ import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout
 import com.watermelon.kanbanboard.util.Constant
 
-class DoneFragment(private val listener: CustomDialogFragment,
-                   private val updateTabLayoutListener: UpdateTabLayout
+class DoneFragment(
+    private val listener: CustomDialogFragment,
+    private val updateTabLayoutListener: UpdateTabLayout
 ) : BaseFragment<FragmentDoneBinding>(), UpdateAdapter {
 
     override val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentDoneBinding

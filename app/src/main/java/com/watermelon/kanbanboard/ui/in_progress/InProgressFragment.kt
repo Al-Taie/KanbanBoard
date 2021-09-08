@@ -1,6 +1,5 @@
 package com.watermelon.kanbanboard.ui.in_progress
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.watermelon.kanbanboard.data.DataManager
@@ -14,13 +13,14 @@ import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout
 import com.watermelon.kanbanboard.util.Constant
 
-class InProgressFragment(private val listener: CustomDialogFragment,
-                         private val updateTabLayoutListener: UpdateTabLayout
+class InProgressFragment(
+    private val listener: CustomDialogFragment,
+    private val updateTabLayoutListener: UpdateTabLayout
 ) : BaseFragment<FragmentInProgressBinding>(), UpdateAdapter {
     override val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentInProgressBinding
         get() = FragmentInProgressBinding::inflate
 
-    lateinit var adapter: TaskAdapter
+    private lateinit var adapter: TaskAdapter
 
     override fun setup() {
         updateRecycler()
@@ -34,7 +34,6 @@ class InProgressFragment(private val listener: CustomDialogFragment,
     }
 
     override fun update() {
-        Log.v("TEST_UPDATE", "UPDATE IN PROGRESS")
         adapter.setData(DataManager.inProgressList)
         updateTabLayoutListener.update()
     }

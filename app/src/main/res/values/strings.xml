@@ -5,6 +5,15 @@
     <string name="add_card">Add Card</string>
     <string name="in_progress">in Progress</string>
     <string name="done">Done</string>
+    <string name="design">Design</string>
+    <string name="code">Code</string>
+    <string name="status">Status</string>
+    <string name="properties">PROPERTIES</string>
+    <string name="title">Title</string>
+    <string name="due_date">Due Date</string>
+    <string name="describe_your_task_here">Describe your task here..</string>
+    <string name="assign_to">Assign To</string>
+    <string name="description">Description</string>
 
     <string-array name="members_names">
         <item>Ahmed Mones</item>

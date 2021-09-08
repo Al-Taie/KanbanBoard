@@ -3,32 +3,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
     <LinearLayout
         android:id="@+id/custom_spinner_item_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_toStartOf="@id/custom_spinner_icon">
+        android:layout_toStartOf="@id/custom_spinner_icon"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/icon_spinner_layout"
-            android:visibility="gone"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:paddingVertical="5dp"
             android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
             android:scaleType="centerCrop"
+            android:visibility="gone"
             tools:src="@drawable/ic_todo" />
 
         <TextView
             android:id="@+id/text_spinner_layout"
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:padding="10dp"
             android:textSize="18sp"
             android:textStyle="bold"
+            android:visibility="gone"
             tools:text="To Do" />
 
     </LinearLayout>

@@ -8,7 +8,6 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.MenuRes
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.appcompat.widget.PopupMenu
@@ -50,7 +49,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
     override val inflate: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
 
-
     private fun initTabLayout() {
         val tabIcons = listOf(
             R.drawable.ic_home,
@@ -60,7 +58,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
         ).map(this::getDrawable)
         binding.apply {
             TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-//                tab.text = tabTitles[position]
                 tab.icon = tabIcons[position]
                 if (position != 0 && position != 3) {
                     val value = when (position) {
@@ -184,8 +181,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
                         override fun getIntrinsicWidth(): Int {
                             return intrinsicHeight + iconMarginPx + iconMarginPx
                         }
-
-
                     }
             }
         }

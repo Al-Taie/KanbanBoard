@@ -11,6 +11,7 @@ object Constant {
         const val TABLE_NAME = 6
         const val EXTENDED = 7
     }
+
     object FragmentType {
         const val ADD = "add"
         const val EDIT = "edit"

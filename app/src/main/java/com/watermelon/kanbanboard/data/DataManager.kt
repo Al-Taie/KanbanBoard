@@ -1,6 +1,5 @@
 package com.watermelon.kanbanboard.data
 
-import android.util.Log
 import com.watermelon.kanbanboard.data.database.TaskDbHelper.TABLES
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout

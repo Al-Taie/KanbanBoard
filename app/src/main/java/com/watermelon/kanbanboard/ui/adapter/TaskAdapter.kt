@@ -1,13 +1,11 @@
 package com.watermelon.kanbanboard.ui.adapter
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ArrayAdapter
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.get
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.watermelon.kanbanboard.R
@@ -16,11 +14,8 @@ import com.watermelon.kanbanboard.data.database.TaskDbHelper.TABLES
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.ItemTaskCardBinding
 import com.watermelon.kanbanboard.ui.diff_util.TaskDiffUtil
-import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
 import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout
-import com.watermelon.kanbanboard.util.CustomSpinnerItem
-import com.watermelon.kanbanboard.util.initData
 
 
 class TaskAdapter(
@@ -53,20 +48,22 @@ class TaskAdapter(
                     R.drawable.ic_in_progress
                 )
 
-                val spinnerIcons = spinnerDrawAbles.map { ResourcesCompat.getDrawable(
-                    root.resources, it,
-                    null)
+                val spinnerIcons = spinnerDrawAbles.map {
+                    ResourcesCompat.getDrawable(
+                        root.resources, it,
+                        null
+                    )
                 }
 
-                var startIconDrawable =  when (tableName) {
-                        TABLES.TO_DO -> spinnerIcons[0]
-                        TABLES.DONE -> spinnerIcons[1]
-                        else -> spinnerIcons[2]
-                    }
+                var startIconDrawable = when (tableName) {
+                    TABLES.TO_DO -> spinnerIcons[0]
+                    TABLES.DONE -> spinnerIcons[1]
+                    else -> spinnerIcons[2]
+                }
 
                 spinner.startIconDrawable = startIconDrawable
 
-                setStatus.setOnItemClickListener { adapterView, selectedItem, i, l ->
+                setStatus.setOnItemClickListener { _, _, i, _ ->
                     startIconDrawable = spinnerIcons[i]
                     spinner.startIconDrawable = startIconDrawable
                     val selectedTable = TABLES.list[i]

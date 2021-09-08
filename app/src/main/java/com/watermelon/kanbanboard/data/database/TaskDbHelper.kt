@@ -10,6 +10,7 @@ import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.util.Constant
 
+
 class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
     override fun onCreate(database: SQLiteDatabase?) {
         TABLES.list.forEach { table ->
@@ -83,6 +84,39 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
 
     }
 
+
+    fun move(task: Task, to : String) {
+        TABLES.apply {
+            when (task.tableName) {
+                TO_DO -> writableDatabase.delete(TO_DO,"id = ?", arrayOf(task.id.toString()))
+                IN_PROGRESS -> writableDatabase.delete(IN_PROGRESS,"id = ?", arrayOf(task.id.toString()))
+                else -> writableDatabase.delete(DONE,"id = ?", arrayOf(task.id.toString()))
+            }
+
+            task.tableName = to
+
+                task.apply {
+                    val newEntry = ContentValues().apply {
+                    with(DB) {
+                        put(TITLE, title)
+                        put(DESCRIPTION, description)
+                        put(ASSIGN_TO, assignedTo)
+                        put(STATUS, status)
+                        put(DATE, dueDate)
+                        put(TABLE_NAME, tableName)
+                        put(EXPANDED, expanded)
+                    }
+                }
+                    when (tableName) {
+                        TO_DO -> writableDatabase.insert(TO_DO,null,newEntry)
+                        IN_PROGRESS -> writableDatabase.insert(IN_PROGRESS,null,newEntry)
+                        else -> writableDatabase.insert(DONE,null,newEntry)
+                    }
+            }
+
+        }
+    }
+
     private fun parseData(cursor: Cursor) {
         val task: Task
         cursor.apply {
@@ -139,4 +173,5 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
         const val DATE = "date"
         const val EXPANDED = "expanded"
     }
+
 }

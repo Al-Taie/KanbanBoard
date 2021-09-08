@@ -20,6 +20,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.database.TaskDbHelper
+import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.ActivityMainBinding
 import com.watermelon.kanbanboard.ui.base.BaseActivity
 import com.watermelon.kanbanboard.ui.done.DoneFragment
@@ -153,6 +154,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
 
     override fun update() {
         initTabLayout()
+    }
+
+    override fun moveTaskInDatabase(task: Task, to: String) {
+        dbHelper.move(task, to)
     }
 
     override fun showDialog(view: View) {

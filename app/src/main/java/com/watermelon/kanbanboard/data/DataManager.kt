@@ -105,6 +105,7 @@ object DataManager {
                 else -> removeDoneTask(task)
             }
 
+            updateTabLayoutListener.moveTaskInDatabase(task, to)
             task.tableName = to
 
             when (to) {

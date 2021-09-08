@@ -1,12 +1,17 @@
 package com.watermelon.kanbanboard.ui
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.InsetDrawable
 import android.icu.text.SimpleDateFormat
 import android.transition.TransitionManager
-import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.MenuRes
+import androidx.appcompat.view.menu.MenuBuilder
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.util.toAndroidXPair
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentTransaction
@@ -15,7 +20,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.database.TaskDbHelper
-import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.ActivityMainBinding
 import com.watermelon.kanbanboard.ui.base.BaseActivity
 import com.watermelon.kanbanboard.ui.done.DoneFragment
@@ -35,7 +39,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
 
     override fun setup() {
         dbHelper = TaskDbHelper(applicationContext)
-       TaskDbHelper.TABLES.list.map { dbHelper.read(it) }
+        TaskDbHelper.TABLES.list.map { dbHelper.read(it) }
         initViewPager()
         initTabLayout()
     }
@@ -44,7 +48,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
 
     override val inflate: (LayoutInflater) -> ActivityMainBinding
         get() = ActivityMainBinding::inflate
-
 
 
     private fun initTabLayout() {
@@ -61,11 +64,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
                 if (position != 0 && position != 3) {
                     val value = when (position) {
                         1 -> DataManager.todoList.size
-                        2 -> DataManager.inProgressList.size
-                        else -> DataManager.doneList.size
+                        else -> DataManager.inProgressList.size
                     }
-                    if(value != 0)
+                    if (value != 0) {
                         tab.orCreateBadge.number = value
+                    } else {
+                        tab.removeBadge()
+                    }
                 }
             }.attach()
         }
@@ -74,9 +79,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
     private fun initViewPager() {
         val fragmentsList = listOf(
             HomeFragment(),
-            TodoFragment(this,this),
-            InProgressFragment(),
-            DoneFragment()
+            TodoFragment(this, this),
+            InProgressFragment(this, this),
+            DoneFragment(this, this)
         )
         val adapter = ViewPagerAdapter(this, fragmentsList = fragmentsList)
         binding.viewPager.adapter = adapter
@@ -105,6 +110,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
 
         componentsVisibility(false)
     }
+
 
     override fun showDatePicker() {
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -147,5 +153,38 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
 
     override fun update() {
         initTabLayout()
+    }
+
+    override fun showDialog(view: View) {
+        showSpinnerMenu(view, R.menu.popup_menu)
+    }
+
+    //In the showMenu function from the previous example:
+    @SuppressLint("RestrictedApi")
+    private fun showSpinnerMenu(v: View, @MenuRes menuRes: Int) {
+        val popup = PopupMenu(this, v)
+        popup.menuInflater.inflate(menuRes, popup.menu)
+
+        if (popup.menu is MenuBuilder) {
+            val menuBuilder = popup.menu as MenuBuilder
+            menuBuilder.setOptionalIconsVisible(true)
+            for (item in menuBuilder.visibleItems) {
+                val iconMarginPx =
+                    TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP, 1f, resources.displayMetrics
+                    )
+                        .toInt()
+                item.icon =
+                    object : InsetDrawable(item.icon, iconMarginPx, 0, iconMarginPx, 0) {
+                        override fun getIntrinsicWidth(): Int {
+                            return intrinsicHeight + iconMarginPx + iconMarginPx
+                        }
+
+
+                    }
+            }
+        }
+
+        popup.show()
     }
 }

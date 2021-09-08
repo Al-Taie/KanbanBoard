@@ -2,6 +2,7 @@ package com.watermelon.kanbanboard.data
 
 import com.watermelon.kanbanboard.data.database.TaskDbHelper.TABLES
 import com.watermelon.kanbanboard.data.domain.Task
+import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout
 import com.watermelon.kanbanboard.util.add
 
 object DataManager {
@@ -60,9 +61,9 @@ object DataManager {
      * @author     Ahmed Mones
      * @return     Int
      * */
-    private fun removeTask(task: Task) : Int {
-        val position = inProgressTasksList.indexOf(task)
-        inProgressTasksList.remove(task)
+    private fun removeDoneTask(task: Task) : Int {
+        val position = doneTasksList.indexOf(task)
+        doneTasksList.remove(task)
         return position
     }
 
@@ -78,7 +79,7 @@ object DataManager {
             val position = when (oldTask.tableName) {
                 TO_DO -> removeTodoTask(oldTask)
                 IN_PROGRESS -> removeProgressTask(oldTask)
-                else -> removeTask(oldTask)
+                else -> removeDoneTask(oldTask)
             }
 
             when (to) {
@@ -87,6 +88,32 @@ object DataManager {
                 DONE -> addDoneTask(task = newTask, index = position)
             }
         }
+    }
+
+    /**
+     * @param task Task Object
+     * @param newTask Task Object
+     * @param to      Table Name
+     * @author     Ahmed Mones
+     * @return     Unit
+     * */
+    fun moveTask(task: Task, to: String, updateTabLayoutListener: UpdateTabLayout) {
+        TABLES.apply {
+            when (task.tableName) {
+                TO_DO -> removeTodoTask(task)
+                IN_PROGRESS -> removeProgressTask(task)
+                else -> removeDoneTask(task)
+            }
+
+            task.tableName = to
+
+            when (to) {
+                TO_DO -> addTodoTask(task = task)
+                IN_PROGRESS -> addInProgressTask(task = task)
+                DONE -> addDoneTask(task = task)
+            }
+        }
+        updateTabLayoutListener.update()
     }
 
     val todoList: List<Task>

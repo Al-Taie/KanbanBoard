@@ -1,25 +1,33 @@
 package com.watermelon.kanbanboard.ui.adapter
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.get
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.watermelon.kanbanboard.R
+import com.watermelon.kanbanboard.data.DataManager
+import com.watermelon.kanbanboard.data.database.TaskDbHelper.TABLES
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.ItemTaskCardBinding
 import com.watermelon.kanbanboard.ui.diff_util.TaskDiffUtil
+import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
 import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
+import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout
 import com.watermelon.kanbanboard.util.CustomSpinnerItem
 import com.watermelon.kanbanboard.util.initData
 
 
-class TaskAdapter(private var list: List<Task>, private val listener: UpdateAdapter) :
+class TaskAdapter(
+    private var list: List<Task>,
+    private val listener: UpdateAdapter,
+    private val updateTabLayoutListener: UpdateTabLayout
+) :
     RecyclerView.Adapter<TaskAdapter.ItemViewHolder>() {
     private lateinit var context: Context
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -38,35 +46,41 @@ class TaskAdapter(private var list: List<Task>, private val listener: UpdateAdap
                 textDeadline.text = dueDate
                 textDescription.text = description
                 buttonEditTask.setOnClickListener { listener.editTask(this) }
+
+                val spinnerDrawAbles = arrayOf(
+                    R.drawable.ic_todo,
+                    R.drawable.ic_done,
+                    R.drawable.ic_in_progress
+                )
+
+                val spinnerIcons = spinnerDrawAbles.map { ResourcesCompat.getDrawable(
+                    root.resources, it,
+                    null)
+                }
+
+                var startIconDrawable =  when (tableName) {
+                        TABLES.TO_DO -> spinnerIcons[0]
+                        TABLES.DONE -> spinnerIcons[1]
+                        else -> spinnerIcons[2]
+                    }
+
+                spinner.startIconDrawable = startIconDrawable
+
+                setStatus.setOnItemClickListener { adapterView, selectedItem, i, l ->
+                    startIconDrawable = spinnerIcons[i]
+                    spinner.startIconDrawable = startIconDrawable
+                    val selectedTable = TABLES.list[i]
+                    DataManager.moveTask(this, selectedTable, updateTabLayoutListener)
+                    listener.update()
+                }
             }
-
-
-            Toast.makeText(context, position.toString(), Toast.LENGTH_LONG).show()
-                initSpinner(spinnerTaskCard)
+            val items = root.resources.getStringArray(R.array.fragments_names)
+            val adapter = ArrayAdapter(context, R.layout.status_dropdown_item, items)
+            setStatus.setAdapter(adapter)
         }
     }
 
-    private fun initSpinner(spinner: Spinner) {
-        val taskCardSpinner: Spinner = spinner
-        val customItemList = arrayListOf<CustomSpinnerItem>().initData()
-
-        taskCardSpinner.apply {
-            adapter = CustomSpinnerAdapter(context, customItemList)
-            object: AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(adapterView: AdapterView<*>, p1: View?, p2: Int, p3: Long) {
-                    dropDownWidth = findViewById<LinearLayout>(R.id.custom_spinner_item_layout).width
-                    val item = adapterView.selectedItem as CustomSpinnerItem
-                    item.tableName
-                }
-
-                override fun onNothingSelected(adapterView: AdapterView<*>?) {
-                    // TODO("Not yet implemented")
-                }
-            }
-        }
-    }
-
-    fun setData(newList: List<Task>){
+    fun setData(newList: List<Task>) {
         val diffResult = DiffUtil.calculateDiff(TaskDiffUtil(oldList = list, newList = newList))
         list = newList
         diffResult.dispatchUpdatesTo(this)

@@ -9,8 +9,9 @@ import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.ItemTaskCardBinding
 import com.watermelon.kanbanboard.ui.diff_util.TaskDiffUtil
+import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 
-class TaskAdapter(private var list: List<Task>) :
+class TaskAdapter(private var list: List<Task>, val listener: UpdateAdapter) :
     RecyclerView.Adapter<TaskAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -27,6 +28,7 @@ class TaskAdapter(private var list: List<Task>) :
                 textPersonName.text = assignedTo
                 textDeadline.text = dueDate
                 textDescription.text = description
+                buttonEditTask.setOnClickListener { listener.editTask(this) }
             }
         }
     }

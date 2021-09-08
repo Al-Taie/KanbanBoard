@@ -12,11 +12,11 @@ object DataManager {
     fun addDoneTask(task: Task) = doneTasksList.add(task)
 
     val todoList: List<Task>
-        get() = todoTasksList
+        get() = todoTasksList.toList()
 
     val inProgressList: List<Task>
-        get() = inProgressTasksList
+        get() = inProgressTasksList.toList()
 
     val doneList: List<Task>
-        get() = doneTasksList
+        get() = doneTasksList.toList()
 }

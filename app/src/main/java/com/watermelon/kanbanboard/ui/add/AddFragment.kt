@@ -13,9 +13,10 @@ import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.FragmentAddBinding
 import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
 import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
+import com.watermelon.kanbanboard.util.Constant
 
 
-class AddFragment(private val listener: CustomDialogFragment, private val updateListener: UpdateAdapter) : DialogFragment() {
+class AddFragment(private val listener: CustomDialogFragment, private val updateListener: UpdateAdapter, val fragmentType: String, val task: Task?) : DialogFragment() {
     val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentAddBinding
         get() = FragmentAddBinding::inflate
 
@@ -39,15 +40,48 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
         binding.apply {
             dateView.setOnClickListener { listener.showDatePicker() }
             pickDateButton.setOnClickListener { listener.showDatePicker() }
-            addButton.setOnClickListener {
-                addTask()
-                listener.closeDialog(this@AddFragment)
+            when(fragmentType){
+
+                Constant.FragmentType.ADD -> {
+                    addButton.text = "add"
+                    addButton.setOnClickListener {
+                        addTask()
+                        listener.closeDialog(this@AddFragment)
+                    }
+                }
+
+                Constant.FragmentType.UPDATE -> {
+                    addButton.text = "edit"
+                    bindTaskData()
+                    addButton.setOnClickListener{
+                        editTask()
+                        listener.closeDialog(this@AddFragment)
+                    }
+                }
             }
+
         }
 
         val items = resources.getStringArray(R.array.members_names)
         val adapter = ArrayAdapter(requireContext(), R.layout.assignto_dropdown_item, items)
         binding.assignTo.setAdapter(adapter)
+    }
+
+    private fun bindTaskData() {
+        binding.apply {
+            title.setText(task?.title)
+            description.setText(task?.description)
+            assignTo.setText(task?.assignedTo)
+            dateViewer.text = task?.dueDate
+            when(task?.status) {
+                CODE -> statusChipGroup.check(R.id.code_chip)
+                else -> statusChipGroup.check(R.id.design_chip)
+            }
+        }
+    }
+
+    private fun editTask() {
+
     }
 
     private fun addTask() {

@@ -33,6 +33,6 @@ class TodoFragment(private val listener: CustomDialogFragment, private val updat
     }
 
     override fun editTask(task: Task) {
-        listener.showDialog(AddFragment(listener, this, Constant.FragmentType.UPDATE, task))
+        listener.showDialog(AddFragment(listener, this, Constant.FragmentType.EDIT, task))
     }
 }

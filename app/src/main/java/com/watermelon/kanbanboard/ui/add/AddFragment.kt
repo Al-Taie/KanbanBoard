@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.watermelon.kanbanboard.R
-import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.database.TaskDbHelper
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.FragmentAddBinding
@@ -16,7 +15,7 @@ import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.util.Constant
 
 
-class AddFragment(private val listener: CustomDialogFragment, private val updateListener: UpdateAdapter, val fragmentType: String, val task: Task?) : DialogFragment() {
+class AddFragment(private val listener: CustomDialogFragment, private val updateListener: UpdateAdapter, private val fragmentType: String, val task: Task?) : DialogFragment() {
     val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentAddBinding
         get() = FragmentAddBinding::inflate
 
@@ -43,15 +42,15 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
             when(fragmentType){
 
                 Constant.FragmentType.ADD -> {
-                    addButton.text = "add"
+                    addButton.text = Constant.FragmentType.ADD
+                    addNewTaskHeadline.text = Title.ADD
                     addButton.setOnClickListener {
                         addTask()
                         listener.closeDialog(this@AddFragment)
                     }
                 }
 
-                Constant.FragmentType.UPDATE -> {
-                    addButton.text = "edit"
+                Constant.FragmentType.EDIT -> {
                     bindTaskData()
                     addButton.setOnClickListener{
                         editTask()
@@ -69,12 +68,14 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
 
     private fun bindTaskData() {
         binding.apply {
+            addButton.text = Constant.FragmentType.EDIT
+            addNewTaskHeadline.text = Title.EDIT
             title.setText(task?.title)
             description.setText(task?.description)
             assignTo.setText(task?.assignedTo)
             dateViewer.text = task?.dueDate
             when(task?.status) {
-                CODE -> statusChipGroup.check(R.id.code_chip)
+                Status.CODE -> statusChipGroup.check(R.id.code_chip)
                 else -> statusChipGroup.check(R.id.design_chip)
             }
         }
@@ -89,8 +90,8 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
         val dbHelper = TaskDbHelper(requireContext())
         binding.apply {
             val status = when (statusChipGroup.checkedChipId) {
-                R.id.code_chip -> CODE
-                else -> DESIGN
+                R.id.code_chip -> Status.CODE
+                else -> Status.DESIGN
             }
 
             task = Task(
@@ -107,8 +108,14 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
         updateListener.update()
     }
 
-    companion object Status {
-        const val DESIGN = "design"
-        const val CODE = "code"
+    companion object
+        object Status {
+            const val DESIGN = "design"
+            const val CODE = "code"
+        }
+    object Title {
+        const val ADD = "Add new Task"
+        const val EDIT = "Edit Task"
     }
+
 }

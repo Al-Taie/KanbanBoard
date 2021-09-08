@@ -12,22 +12,26 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <ImageView
+        <Button
             android:id="@+id/button_edit_task"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:scaleType="center"
-            android:src="@drawable/ic_twotone_edit_24"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            app:icon="@drawable/ic_twotone_edit_24"
+            app:iconTint = "@color/black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
+        <Button
             android:id="@+id/button_pick_color"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
             android:layout_marginStart="16dp"
             android:scaleType="center"
-            android:src="@drawable/ic_twotone_color_lens_24"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            app:icon="@drawable/ic_twotone_color_lens_24"
+            app:iconTint = "@color/black"
             app:layout_constraintStart_toEndOf="@id/button_edit_task"
             app:layout_constraintTop_toTopOf="parent" />
 

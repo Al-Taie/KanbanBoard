@@ -1,4 +1,4 @@
-package com.watermelon.kanbanboard.util
+package com.watermelon.kanbanboard.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.watermelon.kanbanboard.R
+import com.watermelon.kanbanboard.util.CustomSpinnerItem
 
 class CustomSpinnerAdapter(context: Context, customList: ArrayList<CustomSpinnerItem>) :
     ArrayAdapter<CustomSpinnerItem>(context, 0, customList) {
@@ -18,8 +19,8 @@ class CustomSpinnerAdapter(context: Context, customList: ArrayList<CustomSpinner
         val spinnerIcon = convertView.findViewById<ImageView>(R.id.icon_spinner_layout)
         val spinnerText = convertView.findViewById<TextView>(R.id.text_spinner_layout)
         item?.let {
-            spinnerIcon.setImageResource(it.spinnerItemImage)
-            spinnerText.text = it.spinnerItemName
+            spinnerIcon.setImageResource(it.itemImage)
+            spinnerText.text = it.itemName
         }
         return convertView
     }
@@ -31,8 +32,8 @@ class CustomSpinnerAdapter(context: Context, customList: ArrayList<CustomSpinner
         val spinnerItemIcon = convertView.findViewById<ImageView>(R.id.icon_spinner_item)
         val spinnerItemText = convertView.findViewById<TextView>(R.id.text_spinner_item)
         item?.let {
-            spinnerItemIcon.setImageResource(it.spinnerItemImage)
-            spinnerItemText.text = it.spinnerItemName
+            spinnerItemIcon.setImageResource(it.itemImage)
+            spinnerItemText.text = it.itemName
         }
         return convertView
     }

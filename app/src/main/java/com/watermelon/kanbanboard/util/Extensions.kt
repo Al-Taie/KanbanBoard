@@ -22,10 +22,11 @@ fun ArrayList<CustomSpinnerItem>.initData(): ArrayList<CustomSpinnerItem> {
  * @return     Unit
  * */
 fun MutableList<Task>.add(index: Int?, task: Task) {
-    if (index == null)
+    if (index == null) {
         this.add(task)
-    else
+    } else {
         this.add(index, task)
+    }
 }
 
 /**
@@ -34,5 +35,9 @@ fun MutableList<Task>.add(index: Int?, task: Task) {
  * @return     Int
  * */
 fun List<Task>.lastId() : Int {
-    return this.last().id + 1
+    return try {
+        this.last().id + 1
+    } catch (e: Exception) {
+        1
+    }
 }

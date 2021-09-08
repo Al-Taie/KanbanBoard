@@ -1,5 +1,6 @@
 package com.watermelon.kanbanboard.ui.add
 
+import android.content.ContentValues
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +16,12 @@ import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.util.Constant
 
 
-class AddFragment(private val listener: CustomDialogFragment, private val updateListener: UpdateAdapter, private val fragmentType: String, val task: Task?) : DialogFragment() {
+class AddFragment(private val listener: CustomDialogFragment, private val updateListener: UpdateAdapter, private val fragmentType: String,private  val _task: Task?) : DialogFragment() {
     val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentAddBinding
         get() = FragmentAddBinding::inflate
 
     private lateinit var binding: FragmentAddBinding
+    private lateinit var dbHelper : TaskDbHelper
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +35,7 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
     }
 
     private fun setup() {
+        dbHelper = TaskDbHelper(requireContext())
     }
 
     private fun callBack() {
@@ -70,11 +73,11 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
         binding.apply {
             addButton.text = Constant.FragmentType.EDIT
             addNewTaskHeadline.text = Title.EDIT
-            title.setText(task?.title)
-            description.setText(task?.description)
-            assignTo.setText(task?.assignedTo)
-            dateViewer.text = task?.dueDate
-            when(task?.status) {
+            title.setText(_task?.title)
+            description.setText(_task?.description)
+            assignTo.setText(_task?.assignedTo)
+            dateViewer.text = _task?.dueDate
+            when(_task?.status) {
                 Status.CODE -> statusChipGroup.check(R.id.code_chip)
                 else -> statusChipGroup.check(R.id.design_chip)
             }
@@ -82,12 +85,35 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
     }
 
     private fun editTask() {
+        binding.apply {
+            val status = when (statusChipGroup.checkedChipId) {
+                R.id.code_chip -> Status.CODE
+                else -> Status.DESIGN
+            }
+
+
+            val newEntry = ContentValues().apply {
+                with(TaskDbHelper.DB) {
+                    put(TITLE, title.text.toString())
+                    put(DESCRIPTION, description.text.toString())
+                    put(ASSIGN_TO, assignTo.text.toString())
+                    put(STATUS, status)
+                    put(DATE, dateViewer.text.toString())
+                    put(TABLE_NAME, _task?.tableName)
+                    put(EXPANDED, false)
+
+                }
+            }
+            dbHelper.writableDatabase.update(_task?.tableName,newEntry,"id = ?",arrayOf(_task?.id.toString()))
+
+            updateListener.update()
+
+        }
 
     }
 
     private fun addTask() {
         val task: Task
-        val dbHelper = TaskDbHelper(requireContext())
         binding.apply {
             val status = when (statusChipGroup.checkedChipId) {
                 R.id.code_chip -> Status.CODE

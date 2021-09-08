@@ -64,6 +64,27 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
 
     }
 
+    fun edit(task: Task) {
+        val newEntry = ContentValues()
+        task.apply {
+            //initData(table = tableName, task)
+            newEntry.apply {
+                with(DB) {
+                    put(TITLE, title)
+                    put(DESCRIPTION, description)
+                    put(ASSIGN_TO, assignedTo)
+                    put(STATUS, status)
+                    put(DATE, dueDate)
+                    put(TABLE_NAME, tableName)
+                    put(EXPANDED, expanded)
+                }
+            }
+            writableDatabase.update(tableName,newEntry,"id = ?",arrayOf(id.toString()))
+        }
+
+
+    }
+
     private fun parseData(cursor: Cursor) {
         val task: Task
         cursor.apply {

@@ -15,6 +15,7 @@ import com.watermelon.kanbanboard.databinding.FragmentAddBinding
 import com.watermelon.kanbanboard.ui.interfaces.CustomDialogFragment
 import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.util.Constant
+import com.watermelon.kanbanboard.util.lastId
 
 
 class AddFragment(private val listener: CustomDialogFragment,
@@ -96,6 +97,7 @@ class AddFragment(private val listener: CustomDialogFragment,
                 else -> Status.DESIGN
             }
             val editedTask = Task(
+                id = requireNotNull(_task?.id),
                 title = title.text.toString(),
                 description = description.text.toString(),
                 assignedTo = assignTo.text.toString(),
@@ -118,6 +120,7 @@ class AddFragment(private val listener: CustomDialogFragment,
                 }
             }
             dbHelper.writableDatabase.update(_task?.tableName,newEntry,"id = ?",arrayOf(_task?.id.toString()))
+            DataManager.replaceTask(oldTask = requireNotNull(_task), newTask = editedTask, to = _task.tableName)
             updateListener.update()
 
         }
@@ -132,7 +135,10 @@ class AddFragment(private val listener: CustomDialogFragment,
                 else -> Status.DESIGN
             }
 
+            val id = DataManager.todoList.lastId()
+
             task = Task(
+                id = id,
                 title = title.text.toString(),
                 tableName = TaskDbHelper.TABLES.TO_DO,
                 description = description.text.toString(),

@@ -35,7 +35,6 @@ class TodoFragment(private val listener: CustomDialogFragment,
     }
 
     override fun update() {
-        Log.v("TEST_UPDATE", "UPDATE TODO")
         adapter.setData(DataManager.todoList)
         updateTabLayoutListener.update()
     }

@@ -18,6 +18,7 @@ class TaskDiffUtil(private val oldList: List<Task>, private val newList: List<Ta
                         && oldList[oldItemPosition].description == newList[newItemPosition].description
                         && oldList[oldItemPosition].assignedTo == newList[newItemPosition].assignedTo
                         && oldList[oldItemPosition].dueDate == newList[newItemPosition].dueDate
+                        && oldList[oldItemPosition].status == newList[newItemPosition].status
                 )
     }
 }

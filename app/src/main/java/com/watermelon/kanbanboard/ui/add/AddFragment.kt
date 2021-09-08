@@ -2,6 +2,7 @@ package com.watermelon.kanbanboard.ui.add
 
 import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -96,16 +97,16 @@ class AddFragment(private val listener: CustomDialogFragment,
                 R.id.code_chip -> Status.CODE
                 else -> Status.DESIGN
             }
+
             val editedTask = Task(
-                id = requireNotNull(_task?.id),
+                id = requireNotNull(_task).id,
                 title = title.text.toString(),
                 description = description.text.toString(),
                 assignedTo = assignTo.text.toString(),
                 status = status,
                 dueDate = dateViewer.text.toString(),
-                tableName = _task?.tableName.toString(),
+                tableName = _task.tableName,
                 expanded = false
-
             )
             val newEntry = ContentValues().apply {
                 with(TaskDbHelper.DB) {
@@ -114,15 +115,14 @@ class AddFragment(private val listener: CustomDialogFragment,
                     put(ASSIGN_TO, assignTo.text.toString())
                     put(STATUS, status)
                     put(DATE, dateViewer.text.toString())
-                    put(TABLE_NAME, _task?.tableName)
+                    put(TABLE_NAME, _task.tableName)
                     put(EXPANDED, false)
 
                 }
             }
-            dbHelper.writableDatabase.update(_task?.tableName,newEntry,"id = ?",arrayOf(_task?.id.toString()))
-            DataManager.replaceTask(oldTask = requireNotNull(_task), newTask = editedTask, to = _task.tableName)
+            dbHelper.writableDatabase.update(_task.tableName,newEntry,"id = ?",arrayOf(_task.id.toString()))
+            DataManager.replaceTask(oldTask = _task, newTask = editedTask, to = _task.tableName)
             updateListener.update()
-
         }
 
     }

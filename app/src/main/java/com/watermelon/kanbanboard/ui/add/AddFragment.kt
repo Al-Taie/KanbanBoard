@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.DialogFragment
 import com.watermelon.kanbanboard.R
+import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.database.TaskDbHelper
 import com.watermelon.kanbanboard.data.domain.Task
 import com.watermelon.kanbanboard.databinding.FragmentAddBinding
@@ -16,7 +17,11 @@ import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.util.Constant
 
 
-class AddFragment(private val listener: CustomDialogFragment, private val updateListener: UpdateAdapter, private val fragmentType: String,private  val _task: Task?) : DialogFragment() {
+class AddFragment(private val listener: CustomDialogFragment,
+                  private val updateListener: UpdateAdapter,
+                  private val fragmentType: String,
+                  private val _task: Task?
+) : DialogFragment() {
     val inflate: (LayoutInflater, ViewGroup?, attachToRoot: Boolean) -> FragmentAddBinding
         get() = FragmentAddBinding::inflate
 
@@ -90,8 +95,16 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
                 R.id.code_chip -> Status.CODE
                 else -> Status.DESIGN
             }
+            val editedTask = Task(
+                title = title.text.toString(),
+                description = description.text.toString(),
+                assignedTo = assignTo.text.toString(),
+                status = status,
+                dueDate = dateViewer.text.toString(),
+                tableName = _task?.tableName.toString(),
+                expanded = false
 
-
+            )
             val newEntry = ContentValues().apply {
                 with(TaskDbHelper.DB) {
                     put(TITLE, title.text.toString())
@@ -105,7 +118,6 @@ class AddFragment(private val listener: CustomDialogFragment, private val update
                 }
             }
             dbHelper.writableDatabase.update(_task?.tableName,newEntry,"id = ?",arrayOf(_task?.id.toString()))
-
             updateListener.update()
 
         }

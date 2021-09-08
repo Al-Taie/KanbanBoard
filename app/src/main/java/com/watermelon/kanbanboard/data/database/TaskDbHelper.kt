@@ -65,22 +65,22 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
     }
 
     fun edit(task: Task) {
-        val newEntry = ContentValues()
-        task.apply {
-            //initData(table = tableName, task)
-            newEntry.apply {
-                with(DB) {
-                    put(TITLE, title)
-                    put(DESCRIPTION, description)
-                    put(ASSIGN_TO, assignedTo)
-                    put(STATUS, status)
-                    put(DATE, dueDate)
-                    put(TABLE_NAME, tableName)
-                    put(EXPANDED, expanded)
-                }
+        Log.v("EDIT_TITLE","begin edit inside helper = ${task.title}")
+
+        val newEntry = ContentValues().apply {
+            with(DB) {
+                put(TITLE, task.title)
+                put(DESCRIPTION, task.description)
+                put(ASSIGN_TO, task.assignedTo)
+                put(STATUS, task.status)
+                put(DATE, task.dueDate)
+                put(EXPANDED, false)
+
             }
-            writableDatabase.update(tableName,newEntry,"id = ?",arrayOf(id.toString()))
         }
+        Log.v("EDIT_TITLE","end edit inside helper = ${task.title}")
+        writableDatabase.update(task.tableName,newEntry,"id = ?",arrayOf(task.id.toString()))
+
 
 
     }

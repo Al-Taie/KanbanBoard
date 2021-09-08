@@ -11,7 +11,7 @@ import com.watermelon.kanbanboard.databinding.ItemTaskCardBinding
 import com.watermelon.kanbanboard.ui.diff_util.TaskDiffUtil
 import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 
-class TaskAdapter(private var list: List<Task>, val listener: UpdateAdapter) :
+class TaskAdapter(private var list: List<Task>, private val listener: UpdateAdapter) :
     RecyclerView.Adapter<TaskAdapter.ItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {

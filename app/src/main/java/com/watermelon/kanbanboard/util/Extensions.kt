@@ -29,6 +29,6 @@ fun MutableList<Task>.add(index: Int?, task: Task) {
  * @author     Ahmed Mones
  * @return     Int
  * */
-fun MutableList<Task>.lastId() : Int {
+fun List<Task>.lastId() : Int {
     return this.last().id + 1
 }

@@ -34,6 +34,40 @@ object DataManager {
      * */
     fun addDoneTask(task: Task, index: Int? = null) = doneTasksList.add(index, task)
 
+
+    /**
+     * @param task Task Object
+     * @author     Ahmed Mones
+     * @return     Int
+     * */
+    private fun removeTodoTask(task: Task) : Int {
+        val position = todoTasksList.indexOf(task)
+        todoTasksList.remove(task)
+        return position
+    }
+
+    /**
+     * @param task Task Object
+     * @author     Ahmed Mones
+     * @return     Int
+     * */
+    private fun removeProgressTask(task: Task) : Int {
+        val position = inProgressTasksList.indexOf(task)
+        inProgressTasksList.remove(task)
+        return position
+    }
+
+    /**
+     * @param task Task Object
+     * @author     Ahmed Mones
+     * @return     Int
+     * */
+    private fun removeDoneTask(task: Task) : Int {
+        val position = doneTasksList.indexOf(task)
+        doneTasksList.remove(task)
+        return position
+    }
+
     /**
      * @param oldTask Task Object
      * @param newTask Task Object
@@ -61,15 +95,19 @@ object DataManager {
      * */
     fun moveTask(task: Task, to: String, updateTabLayoutListener: UpdateTabLayout) {
         TABLES.apply {
-            val position = getPosition(task = task)
+            when (task.tableName) {
+                TO_DO -> removeTodoTask(task)
+                IN_PROGRESS -> removeProgressTask(task)
+                else -> removeDoneTask(task)
+            }
 
             updateTabLayoutListener.moveTaskInDatabase(task, to)
             task.tableName = to
 
             when (to) {
-                TO_DO -> todoTasksList[position] = task
-                IN_PROGRESS -> inProgressTasksList[position] = task
-                DONE -> doneTasksList[position] = task
+                TO_DO -> addTodoTask(task = task)
+                IN_PROGRESS -> addInProgressTask(task = task)
+                DONE -> addDoneTask(task = task)
             }
         }
         updateTabLayoutListener.update()

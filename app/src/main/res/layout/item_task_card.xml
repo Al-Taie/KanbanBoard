@@ -35,15 +35,23 @@
             app:layout_constraintStart_toEndOf="@id/button_edit_task"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Spinner
-            android:id="@+id/spinner_task_card"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-6dp"
-            android:background="@drawable/task_card_spinner_background"
-            android:minHeight="42dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/spinner"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="105dp"
+            android:layout_height="0dp"
+            app:startIconDrawable="@drawable/ic_todo"
+            app:shapeAppearance="@style/cutShape"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/button_pick_color"
+            app:layout_constraintBottom_toBottomOf="@id/button_pick_color">
+
+            <AutoCompleteTextView
+                android:id="@+id/set_status"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/text_title"

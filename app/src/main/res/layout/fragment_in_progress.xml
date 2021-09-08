@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:background="@drawable/todo_text_background"
-        android:text="@string/in_porgress"
+        android:text="@string/in_progress"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="@color/purple_text"

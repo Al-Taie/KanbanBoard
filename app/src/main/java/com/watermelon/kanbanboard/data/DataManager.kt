@@ -69,34 +69,24 @@ object DataManager {
     /**
      * @param oldTask Task Object
      * @param newTask Task Object
+     * @param to      Table Name
      * @author     Ahmed Mones
      * @return     Unit
      * */
-    fun replaceTodoTask(oldTask: Task, newTask: Task) {
-        val index = removeTodoTask(oldTask)
-        todoTasksList.add(index, newTask)
-    }
+    fun replaceTask(oldTask: Task, newTask: Task, to: String) {
+        TABLES.apply {
+            val position = when (oldTask.tableName) {
+                TO_DO -> removeTodoTask(oldTask)
+                IN_PROGRESS -> removeProgressTask(oldTask)
+                else -> removeTask(oldTask)
+            }
 
-    /**
-     * @param oldTask Task Object
-     * @param newTask Task Object
-     * @author     Ahmed Mones
-     * @return     Unit
-     * */
-    fun replaceInProgressTask(oldTask: Task, newTask: Task) {
-        val index = removeTodoTask(oldTask)
-        todoTasksList.add(index, newTask)
-    }
-
-    /**
-     * @param oldTask Task Object
-     * @param newTask Task Object
-     * @author     Ahmed Mones
-     * @return     Unit
-     * */
-    fun replaceDoneTask(oldTask: Task, newTask: Task) {
-        val index = removeTodoTask(oldTask)
-        todoTasksList.add(index, newTask)
+            when (to) {
+                TO_DO -> addTodoTask(task = newTask, index = position)
+                IN_PROGRESS -> addInProgressTask(task = newTask, index = position)
+                DONE -> addDoneTask(task = newTask, index = position)
+            }
+        }
     }
 
     /**

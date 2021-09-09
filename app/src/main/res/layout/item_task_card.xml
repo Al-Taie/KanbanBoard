@@ -5,6 +5,7 @@
     android:id="@+id/task_card"
     style="@style/Widget.App.CardView"
     android:layout_width="match_parent"
+    app:cardBackgroundColor="@color/blue_task"
     android:layout_height="wrap_content"
     android:layout_margin="12dp">
 
@@ -36,6 +37,19 @@
             app:iconTint="@color/black"
             app:layout_constraintStart_toEndOf="@id/button_edit_task"
             app:layout_constraintTop_toTopOf="parent" />
+        <LinearLayout
+            android:id="@+id/color_palette_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginVertical="-8dp"
+            android:layout_marginEnd="-8dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="@id/pink_color_picker"
+            app:layout_constraintBottom_toBottomOf="@id/pink_color_picker"
+            app:layout_constraintEnd_toEndOf="@id/pink_color_picker"
+            app:layout_constraintStart_toStartOf="@id/button_pick_color"
+            android:background="@drawable/color_palette_background"
+            android:orientation="horizontal" />
 
         <Button
             android:id="@+id/button_pick_color"
@@ -48,11 +62,70 @@
             app:iconTint="@color/black"
             app:layout_constraintStart_toEndOf="@id/button_remove"
             app:layout_constraintTop_toTopOf="parent" />
+        <ImageButton
+            android:id="@+id/blue_color_picker"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="2dp"
+            android:visibility="gone"
+            android:backgroundTint="@color/blue_task"
+            android:backgroundTintMode="multiply"
+            android:background="@drawable/task_button_color"
+            app:layout_constraintBottom_toBottomOf="@id/button_pick_color"
+            app:layout_constraintStart_toEndOf="@id/button_pick_color"
+            app:layout_constraintTop_toTopOf="@id/button_pick_color"
+            app:srcCompat="@android:color/transparent"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/green_color_picker"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/task_button_color"
+            android:backgroundTint="@color/green_task"
+            android:visibility="gone"
+            android:backgroundTintMode="multiply"
+            app:layout_constraintBottom_toBottomOf="@id/blue_color_picker"
+            app:layout_constraintStart_toEndOf="@id/blue_color_picker"
+            app:layout_constraintTop_toTopOf="@id/blue_color_picker"
+            app:srcCompat="@android:color/transparent"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/yellow_color_picker"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/yellow_task"
+            android:visibility="gone"
+            android:backgroundTintMode="multiply"
+            android:background="@drawable/task_button_color"
+            app:layout_constraintBottom_toBottomOf="@id/green_color_picker"
+            app:layout_constraintStart_toEndOf="@id/green_color_picker"
+            app:layout_constraintTop_toTopOf="@id/green_color_picker"
+            app:srcCompat="@android:color/transparent"
+            tools:ignore="ContentDescription" />
+
+        <ImageButton
+            android:id="@+id/pink_color_picker"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/pink_task"
+            android:visibility="gone"
+            android:backgroundTintMode="multiply"
+            android:background="@drawable/task_button_color"
+            app:layout_constraintBottom_toBottomOf="@id/yellow_color_picker"
+            app:layout_constraintStart_toEndOf="@id/yellow_color_picker"
+            app:layout_constraintTop_toTopOf="@id/yellow_color_picker"
+            app:srcCompat="@android:color/transparent"
+            tools:ignore="ContentDescription" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/spinner"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="100dp"
+            android:layout_width="80dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="@id/button_pick_color"
             app:layout_constraintEnd_toEndOf="parent"

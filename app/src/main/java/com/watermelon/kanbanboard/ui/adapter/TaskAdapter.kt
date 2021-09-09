@@ -83,9 +83,40 @@ class TaskAdapter(
             arrowButton.setOnClickListener {
                 cardExpandState(binding = this)
             }
+            val colorPickList = mutableListOf(
+                colorPaletteBackground,
+                blueColorPicker,
+                greenColorPicker,
+                yellowColorPicker,
+                pinkColorPicker
+            )
+
+            buttonPickColor.setOnClickListener {
+                colorExpandState(list = colorPickList)
+            }
+            colorPickBackground(binding = this , list = colorPickList)
         }
+    }
 
+    private fun colorPickBackground(binding: ItemTaskCardBinding, list: MutableList<View>) {
+        for(i in 0..4){
+            list[i].setOnClickListener {
+                binding.taskCard.backgroundTintList = list[i].backgroundTintList
+            }
+        }
+    }
 
+    private fun colorExpandState(list: MutableList<View>) {
+            TransitionManager.beginDelayedTransition(list[0] as ViewGroup)
+            if (list[0].visibility == View.GONE){
+              list.forEach {
+                  it.visibility = View.VISIBLE
+              }
+            }else if (list[0].visibility == View.VISIBLE){
+                list.forEach {
+                    it.visibility = View.GONE
+                }
+            }
     }
 
     fun setData(newList: List<Task>) {
@@ -98,6 +129,7 @@ class TaskAdapter(
 
     class ItemViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
         val binding = ItemTaskCardBinding.bind(viewItem)
+
     }
 
     private fun cardExpandState(binding: ItemTaskCardBinding) {

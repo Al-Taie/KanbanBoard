@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.TransitionManager
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.database.TaskDbHelper.TABLES
@@ -74,7 +75,13 @@ class TaskAdapter(
             val items = root.resources.getStringArray(R.array.fragments_names)
             val adapter = ArrayAdapter(context, R.layout.status_dropdown_item, items)
             setStatus.setAdapter(adapter)
+
+            arrowButton.setOnClickListener {
+                cardExpandState(binding = this)
+            }
         }
+
+
     }
 
     fun setData(newList: List<Task>) {
@@ -88,4 +95,19 @@ class TaskAdapter(
     class ItemViewHolder(viewItem: View) : RecyclerView.ViewHolder(viewItem) {
         val binding = ItemTaskCardBinding.bind(viewItem)
     }
+
+    private fun cardExpandState(binding: ItemTaskCardBinding) {
+        binding.apply {
+            TransitionManager.beginDelayedTransition(taskCard)
+            if (expandableLayout.visibility == View.VISIBLE) {
+                expandableLayout.visibility = View.GONE
+                arrowButton.setImageResource(R.drawable.ic_baseline_expand_more_24)
+            } else {
+                expandableLayout.visibility = View.VISIBLE
+                arrowButton.setImageResource(R.drawable.ic_baseline_expand_less_24)
+            }
+        }
+
+    }
+
 }

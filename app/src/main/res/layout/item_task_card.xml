@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/task_card"
     style="@style/Widget.App.CardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,37 +15,50 @@
 
         <Button
             android:id="@+id/button_edit_task"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="42dp"
             android:layout_height="42dp"
+            android:layout_marginStart="-8dp"
             android:scaleType="center"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             app:icon="@drawable/ic_twotone_edit_24"
-            app:iconTint = "@color/black"
-            app:layout_constraintStart_toStartOf="parent"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toStartOf="@id/text_status"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_remove"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="-8dp"
+            android:scaleType="center"
+            app:icon="@drawable/ic_baseline_delete_forever_24"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toEndOf="@id/button_edit_task"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button_pick_color"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             android:layout_width="42dp"
             android:layout_height="42dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="-8dp"
             android:scaleType="center"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
             app:icon="@drawable/ic_twotone_color_lens_24"
-            app:iconTint = "@color/black"
-            app:layout_constraintStart_toEndOf="@id/button_edit_task"
+            app:iconTint="@color/black"
+            app:layout_constraintStart_toEndOf="@id/button_remove"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/spinner"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="105dp"
+            android:layout_width="100dp"
             android:layout_height="0dp"
-            app:startIconDrawable="@drawable/ic_todo"
-            app:shapeAppearance="@style/cutShape"
+            app:layout_constraintBottom_toBottomOf="@id/button_pick_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/button_pick_color"
-            app:layout_constraintBottom_toBottomOf="@id/button_pick_color">
+            app:shapeAppearance="@style/cutShape"
+            app:startIconDrawable="@drawable/ic_todo">
 
             <AutoCompleteTextView
                 android:id="@+id/set_status"
@@ -93,7 +107,6 @@
             app:layout_constraintTop_toTopOf="@id/image_profile"
             tools:text="Micheal Lapondale" />
 
-
         <TextView
             android:id="@+id/text_deadline"
             android:layout_width="wrap_content"
@@ -116,12 +129,24 @@
             app:layout_constraintTop_toBottomOf="@id/image_profile"
             tools:text="Design" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/arrow_button"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="18dp"
+            android:src="@drawable/ic_baseline_expand_more_24"
+            app:layout_constraintBottom_toBottomOf="@id/text_status"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_status" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/expandable_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:visibility="visible"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_status">
@@ -146,8 +171,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:background="#FFF"
-                android:text="@string/description"
                 android:paddingHorizontal="4dp"
+                android:text="@string/description"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"

@@ -42,7 +42,7 @@ class TaskAdapter(
                 textDeadline.text = dueDate
                 textDescription.text = description
                 buttonEditTask.setOnClickListener { listener.editTask(this) }
-                buttonPickColor.setOnClickListener {
+                buttonRemove.setOnClickListener {
                     updateTabLayoutListener.deleteTask(this)
                     listener.update()
                 }

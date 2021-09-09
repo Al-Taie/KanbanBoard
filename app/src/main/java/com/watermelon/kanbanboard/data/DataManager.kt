@@ -113,6 +113,17 @@ object DataManager {
         updateTabLayoutListener.update()
     }
 
+    fun deleteTask(task: Task){
+        TABLES.apply {
+            when(task.tableName) {
+                TO_DO -> removeTodoTask(task)
+                IN_PROGRESS -> removeProgressTask(task)
+                else -> removeDoneTask(task)
+            }
+        }
+
+    }
+
     /**
      * @param task Task Object
      * @author     Ahmed Mones

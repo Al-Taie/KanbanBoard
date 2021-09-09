@@ -153,6 +153,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), CustomDialogFragment, 
         initTabLayout()
     }
 
+    override fun deleteTask(task: Task) {
+        DataManager.deleteTask(task)
+        dbHelper.delete(task)
+    }
+
     override fun moveTaskInDatabase(task: Task, to: String) {
         dbHelper.move(task, to)
     }

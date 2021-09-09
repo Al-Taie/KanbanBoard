@@ -41,6 +41,10 @@ class TaskAdapter(
                 textDeadline.text = dueDate
                 textDescription.text = description
                 buttonEditTask.setOnClickListener { listener.editTask(this) }
+                buttonPickColor.setOnClickListener {
+                    updateTabLayoutListener.deleteTask(this)
+                    listener.update()
+                }
 
                 val spinnerDrawAbles = arrayOf(
                     R.drawable.ic_checklist,

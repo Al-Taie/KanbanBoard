@@ -1,6 +1,7 @@
 package com.watermelon.kanbanboard.ui.adapter
 
 import android.content.Context
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +9,6 @@ import android.widget.ArrayAdapter
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.transition.TransitionManager
 import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.database.TaskDbHelper.TABLES
@@ -17,6 +17,7 @@ import com.watermelon.kanbanboard.databinding.ItemTaskCardBinding
 import com.watermelon.kanbanboard.ui.diff_util.TaskDiffUtil
 import com.watermelon.kanbanboard.ui.interfaces.UpdateAdapter
 import com.watermelon.kanbanboard.ui.interfaces.UpdateTabLayout
+import com.watermelon.kanbanboard.util.slideVisibility
 
 
 class TaskAdapter(
@@ -76,6 +77,7 @@ class TaskAdapter(
                     listener.update()
                 }
             }
+
             val items = root.resources.getStringArray(R.array.fragments_names)
             val adapter = ArrayAdapter(context, R.layout.status_dropdown_item, items)
             setStatus.setAdapter(adapter)
@@ -134,12 +136,11 @@ class TaskAdapter(
 
     private fun cardExpandState(binding: ItemTaskCardBinding) {
         binding.apply {
-            TransitionManager.beginDelayedTransition(taskCard)
             if (expandableLayout.visibility == View.VISIBLE) {
-                expandableLayout.visibility = View.GONE
+                expandableLayout.slideVisibility(false)
                 arrowButton.setImageResource(R.drawable.ic_baseline_expand_more_24)
             } else {
-                expandableLayout.visibility = View.VISIBLE
+                expandableLayout.slideVisibility(true)
                 arrowButton.setImageResource(R.drawable.ic_baseline_expand_less_24)
             }
         }

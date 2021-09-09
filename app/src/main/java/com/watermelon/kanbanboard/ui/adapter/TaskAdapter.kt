@@ -99,7 +99,7 @@ class TaskAdapter(
     }
 
     private fun colorPickBackground(binding: ItemTaskCardBinding, list: MutableList<View>) {
-        for(i in 0..4){
+        for(i in 1..4){
             list[i].setOnClickListener {
                 binding.taskCard.backgroundTintList = list[i].backgroundTintList
             }

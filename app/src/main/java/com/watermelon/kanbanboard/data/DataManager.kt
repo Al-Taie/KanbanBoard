@@ -112,7 +112,12 @@ object DataManager {
         }
         updateTabLayoutListener.update()
     }
-
+    /**
+     * delete task from the list
+     * @param task Task Object
+     * @author     Karrar Mohammed
+     * @return     Unit
+     * */
     fun deleteTask(task: Task){
         TABLES.apply {
             when(task.tableName) {

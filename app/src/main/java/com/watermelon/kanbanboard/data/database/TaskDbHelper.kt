@@ -5,6 +5,7 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.ContactsContract
 import android.util.Log
 import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.data.domain.Task
@@ -99,6 +100,8 @@ class TaskDbHelper(context: Context) : SQLiteOpenHelper(context, DB_NAME, null, 
 
         }
     }
+
+    fun delete(task: Task) = writableDatabase.delete(task.tableName,"id = ?", arrayOf(task.id.toString()))
 
     private fun parseData(cursor: Cursor) {
         val task: Task

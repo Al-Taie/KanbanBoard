@@ -42,8 +42,8 @@ fun List<Task>.lastId(): Int {
  * @see        <a href="https://stackoverflow.com/a/67856091/16375959">Stakoverfolw Answer</a>
  * @return     Unit
  * */
-fun View.slideVisibility(visibility: Boolean, duration: Long = 350) {
-    val transition = Slide(Gravity.BOTTOM)
+fun View.slideVisibility(visibility: Boolean, duration: Long = 350, gravity: Int = Gravity.BOTTOM) {
+    val transition = Slide(gravity)
     transition.apply {
         this.duration = duration
         addTarget(this@slideVisibility)

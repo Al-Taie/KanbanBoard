@@ -2,7 +2,6 @@ package com.watermelon.kanbanboard.ui.add
 
 import android.content.ContentValues
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,14 +42,25 @@ class AddFragment(private val listener: CustomDialogFragment,
 
     private fun setup() {
         dbHelper = TaskDbHelper(requireContext())
+        initAddEdit()
     }
 
     private fun callBack() {
         binding.apply {
             dateView.setOnClickListener { listener.showDatePicker() }
             pickDateButton.setOnClickListener { listener.showDatePicker() }
-            when(fragmentType){
+            exitButton.setOnClickListener { listener.closeDialog(this@AddFragment) }
+        }
 
+        val items = resources.getStringArray(R.array.members_names)
+        val adapter = ArrayAdapter(requireContext(), R.layout.assignto_dropdown_item, items)
+        binding.assignTo.setAdapter(adapter)
+    }
+
+
+    private fun initAddEdit() {
+        binding.apply {
+            when (fragmentType) {
                 Constant.FragmentType.ADD -> {
                     addButton.text = Constant.FragmentType.ADD
                     addNewTaskHeadline.text = Title.ADD
@@ -62,7 +72,7 @@ class AddFragment(private val listener: CustomDialogFragment,
 
                 Constant.FragmentType.EDIT -> {
                     bindTaskData()
-                    addButton.setOnClickListener{
+                    addButton.setOnClickListener {
                         editTask()
                         listener.closeDialog(this@AddFragment)
                     }
@@ -70,6 +80,7 @@ class AddFragment(private val listener: CustomDialogFragment,
             }
 
         }
+
 
         val items = resources.getStringArray(R.array.members_names)
         val adapter = ArrayAdapter(requireContext(), R.layout.assignto_dropdown_item, items)
@@ -84,7 +95,7 @@ class AddFragment(private val listener: CustomDialogFragment,
             description.setText(_task?.description)
             assignTo.setText(_task?.assignedTo)
             dateViewer.text = _task?.dueDate
-            when(_task?.status) {
+            when (_task?.status) {
                 Status.CODE -> statusChipGroup.check(R.id.code_chip)
                 else -> statusChipGroup.check(R.id.design_chip)
             }
@@ -153,10 +164,11 @@ class AddFragment(private val listener: CustomDialogFragment,
     }
 
     companion object
-        object Status {
-            const val DESIGN = "design"
-            const val CODE = "code"
-        }
+    object Status {
+        const val DESIGN = "design"
+        const val CODE = "code"
+    }
+
     object Title {
         const val ADD = "Add new Task"
         const val EDIT = "Edit Task"

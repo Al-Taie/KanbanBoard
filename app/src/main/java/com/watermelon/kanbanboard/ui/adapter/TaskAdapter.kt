@@ -103,20 +103,19 @@ class TaskAdapter(
     private fun colorPickBackground(binding: ItemTaskCardBinding, list: MutableList<View>) {
         for(i in 1..4){
             list[i].setOnClickListener {
-                binding.taskCard.backgroundTintList = list[i].backgroundTintList
+                binding.taskCard.setStrokeColor(list[i].backgroundTintList)
             }
         }
     }
 
     private fun colorExpandState(list: MutableList<View>) {
-            TransitionManager.beginDelayedTransition(list[0] as ViewGroup)
             if (list[0].visibility == View.GONE){
               list.forEach {
-                  it.visibility = View.VISIBLE
+                 it.slideVisibility(true, gravity = Gravity.TOP)
               }
             }else if (list[0].visibility == View.VISIBLE){
                 list.forEach {
-                    it.visibility = View.GONE
+                    it.slideVisibility(false,gravity = Gravity.TOP)
                 }
             }
     }

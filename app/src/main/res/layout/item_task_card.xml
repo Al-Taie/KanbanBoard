@@ -6,7 +6,6 @@
     android:id="@+id/task_card"
     style="@style/Widget.App.CardView"
     android:layout_width="match_parent"
-    app:cardBackgroundColor="@color/blue_task"
     android:layout_height="wrap_content"
     android:layout_margin="12dp">
 

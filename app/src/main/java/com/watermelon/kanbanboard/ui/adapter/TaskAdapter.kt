@@ -101,9 +101,9 @@ class TaskAdapter(
     }
 
     private fun colorPickBackground(binding: ItemTaskCardBinding, list: List<ImageButton>) {
-        for(i in 1..4){
-            list[i].setOnClickListener {
-                binding.taskCard.setStrokeColor(list[i].backgroundTintList)
+        list.forEach { it1 ->
+            it1.setOnClickListener {
+                binding.taskCard.setStrokeColor(it.backgroundTintList)
             }
         }
     }

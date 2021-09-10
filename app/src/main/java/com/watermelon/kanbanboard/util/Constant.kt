@@ -13,7 +13,7 @@ object Constant {
     }
 
     object FragmentType {
-        const val ADD = "add"
-        const val EDIT = "edit"
+        const val ADD = "Add"
+        const val EDIT = "Edit"
     }
 }

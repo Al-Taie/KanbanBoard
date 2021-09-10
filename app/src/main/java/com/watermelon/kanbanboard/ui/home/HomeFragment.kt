@@ -8,6 +8,7 @@ import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
+import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.databinding.FragmentHomeBinding
 import com.watermelon.kanbanboard.ui.base.BaseFragment
 
@@ -16,10 +17,27 @@ import com.watermelon.kanbanboard.ui.base.BaseFragment
  * create an instance of this fragment.
  */
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
-    override fun setup() {}
+    override fun setup() {
+
+    }
 
     override fun callBack() {
         initPieChart()
+        initNumber()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initNumber()
+        initPieChart()
+    }
+
+    private fun initNumber() {
+        binding.apply {
+            numberTodo.text = DataManager.todoList.size.toString()
+            numberInProgress.text = DataManager.inProgressList.size.toString()
+            numberDone.text = DataManager.doneList.size.toString()
+        }
     }
 
     private fun initPieChart() {
@@ -34,7 +52,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 arrayOf(
                     AASeriesElement()
                         .enableMouseTracking(true)
-                        .data(arrayOf(4, 6, 8)),
+                        .data(arrayOf(DataManager.todoList.size, DataManager.inProgressList.size, DataManager.doneList.size)),
                 )
             )
             .animationDuration(3000)

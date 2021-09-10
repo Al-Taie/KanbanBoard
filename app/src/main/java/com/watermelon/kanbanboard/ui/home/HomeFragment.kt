@@ -3,11 +3,13 @@ package com.watermelon.kanbanboard.ui.home
 import android.graphics.ColorSpace
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel
 import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType
 import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement
 import com.github.aachartmodel.aainfographics.aaoptionsmodel.AAStyle
+import com.watermelon.kanbanboard.R
 import com.watermelon.kanbanboard.data.DataManager
 import com.watermelon.kanbanboard.databinding.FragmentHomeBinding
 import com.watermelon.kanbanboard.ui.base.BaseFragment
@@ -41,12 +43,13 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     }
 
     private fun initPieChart() {
+        val green = resources.getColor(R.color.green, null)
         val aaChartModel: AAChartModel = AAChartModel()
             .chartType(AAChartType.Column)
             .dataLabelsEnabled(true)
             .legendEnabled(false)
-            .titleStyle(AAStyle().color("#008000"))
-            .backgroundColor(ColorSpace.Rgb.ILLUMINANT_A)
+            .backgroundColor(green)
+            .colorsTheme(arrayOf("#73CCAE"))
             .categories(arrayOf("ToDo", "In Progress", "Done"))
             .series(
                 arrayOf(
@@ -56,6 +59,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
                 )
             )
             .animationDuration(3000)
+
+
         binding.homePieChart.apply {
             aa_drawChartWithChartModel(aaChartModel)
             aa_updateChartWithOptions(aaChartModel, true)

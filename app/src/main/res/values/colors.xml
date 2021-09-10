@@ -28,5 +28,5 @@
     <color name="blue_task">#cbf0f8</color>
     <color name="green_task">#ccff90</color>
     <color name="pink_task">#ffccec</color>
-    <color name="homeIconsColor">#383B49</color>
+    <color name="homeIconsColor">@color/white</color>
 </resources>

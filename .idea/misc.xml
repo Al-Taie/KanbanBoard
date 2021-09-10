@@ -17,6 +17,7 @@
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_baseline_expand_less_24.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_checklist.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_kanaban_post_cover.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_kanban.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_spinner.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_todo.xml" value="0.22552083333333334" />
@@ -29,6 +30,7 @@
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/custom_spinner_layout.xml" value="0.209375" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/fragment_add.xml" value="0.20615384615384616" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/fragment_done.xml" value="0.209375" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/item_task_card.xml" value="0.20615384615384616" />
         <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22552083333333334" />
       </map>

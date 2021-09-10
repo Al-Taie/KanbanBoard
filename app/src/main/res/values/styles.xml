@@ -5,7 +5,7 @@
         <item name="shapeAppearance">@style/ShapeAppearance.App.MediumComponent</item>
         <item name="cardElevation">5dp</item>
         <item name="cardUseCompatPadding">true</item>
-        <item name="strokeColor">@color/purple_200</item>
+        <item name="strokeColor">@color/green</item>
         <item name="strokeWidth">2dp</item>
     </style>
 
@@ -40,6 +40,11 @@
         <item name="cornerFamilyBottomRight">cut</item>
         <item name="cornerSizeTopLeft">10dp</item>
         <item name="cornerSizeBottomRight">10dp</item>
+    </style>
+
+
+    <style name="homeImageStyle" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <item name="cornerSize">20dp</item>
     </style>
 
 </resources>

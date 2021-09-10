@@ -14,7 +14,7 @@
         android:layout_margin="16dp"
         android:background="@drawable/todo_text_background"
         android:text="@string/in_progress"
-        android:textColor="@color/purple_text"
+        android:textColor="@color/purple"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"

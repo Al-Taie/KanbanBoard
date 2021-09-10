@@ -165,12 +165,12 @@ class AddFragment(private val listener: CustomDialogFragment,
 
     companion object
     object Status {
-        const val DESIGN = "design"
-        const val CODE = "code"
+        const val DESIGN = "Design"
+        const val CODE = "Code"
     }
 
     object Title {
-        const val ADD = "Add new Task"
+        const val ADD = "Add New Task"
         const val EDIT = "Edit Task"
     }
 

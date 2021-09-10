@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable-v24/color_palette_background.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable-v24/task_button_color.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable-v24/task_button_color_idle.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable-v24/task_button_color_pressed.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable-v24/task_card_green.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable-v24/task_card_pink.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable-v24/task_card_yellow.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/custom_add_button.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/home_background_shape.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_arrow.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_baseline_delete_forever_24.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_baseline_expand_less_24.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_checklist.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_kanaban_post_cover.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_kanban.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_spinner.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/ic_todo.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/properties_background.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/shape_task_description_border.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/shape_task_highlight_border.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/splash_screen.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/task_card_spinner_background.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/drawable/todo_text_background.xml" value="0.22552083333333334" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/custom_spinner_layout.xml" value="0.209375" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/fragment_add.xml" value="0.20615384615384616" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/fragment_done.xml" value="0.209375" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/fragment_home.xml" value="0.22" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/layout/item_task_card.xml" value="0.20615384615384616" />
+        <entry key="..\:/Users/Zahraa/AndroidStudioProjects/KanbanBoard/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.22552083333333334" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_15" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

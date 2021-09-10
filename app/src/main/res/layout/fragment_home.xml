@@ -9,164 +9,237 @@
     tools:context=".ui.home.HomeFragment">
 
     <ImageView
+        android:layout_margin="4dp"
         android:id="@+id/home_image"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/kanban_image"
-        android:layout_marginLeft="16dp"
+        android:src="@drawable/ic_kanaban_home"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main_constraint"
+    <TextView
+        android:id="@+id/my_tasks_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="24dp"
+        android:elevation="8dp"
+        android:text="@string/my_tasks"
+        android:textColor="@color/darkGrey"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_image" />
+
+<!--to do card-->
+    <TextView
+        android:id="@+id/todo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:elevation="3dp"
+        android:text="@string/to_do"
+        android:textColor="@color/homeIconsColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/card_view_one"
+        app:layout_constraintStart_toEndOf="@+id/image_inside_first_card"
+        app:layout_constraintTop_toTopOf="@+id/card_view_one" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_one"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="205dp"
-        android:background="@drawable/home_background_shape"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/violet"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_tasks_text">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/custom_add_button">
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <ImageView
+        android:id="@+id/image_inside_first_card"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="16dp"
+        android:elevation="4dp"
+        android:src="@drawable/ic_checklist"
+        app:tint="@color/homeIconsColor"
+        app:layout_constraintBottom_toBottomOf="@id/card_view_one"
+        app:layout_constraintLeft_toLeftOf="@id/card_view_one"
+        app:layout_constraintTop_toTopOf="@id/card_view_one"
+        tools:ignore="ContentDescription" />
+
+
+    <TextView
+        android:id="@+id/number_todo"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:elevation="3dp"
+        android:textColor="@color/white"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/card_view_one"
+        app:layout_constraintEnd_toEndOf="@id/card_view_one"
+        app:layout_constraintStart_toEndOf="@+id/todo_text"
+        app:layout_constraintTop_toTopOf="@id/card_view_one"
+        tools:text="5" />
+
+<!--  in progress card  -->
+    <TextView
+        android:id="@+id/inprogress_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:elevation="3dp"
+        android:text="@string/in_progress"
+        android:textColor="@color/homeIconsColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/card_view_two"
+        app:layout_constraintStart_toEndOf="@+id/image_inside_second_card"
+        app:layout_constraintTop_toTopOf="@+id/card_view_two" />
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_two"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_view_one">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/custom_add_button">
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/image_inside_second_card"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="16dp"
+        android:elevation="4dp"
+        android:src="@drawable/ic_in_progress"
+        app:tint="@color/homeIconsColor"
+        app:layout_constraintBottom_toBottomOf="@id/card_view_two"
+        app:layout_constraintLeft_toLeftOf="@id/card_view_two"
+        app:layout_constraintTop_toTopOf="@id/card_view_two"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/number_in_progress"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:elevation="3dp"
+        android:textSize="26sp"
+        tools:text="5"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@id/number_todo"
+        app:layout_constraintEnd_toEndOf="@id/number_todo"
+        app:layout_constraintBottom_toBottomOf="@id/card_view_two"
+        app:layout_constraintTop_toTopOf="@id/card_view_two" />
+
+
+<!--done card-->
+
+    <TextView
+        android:id="@+id/done_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:elevation="3dp"
+        android:text="@string/done"
+        android:textColor="@color/homeIconsColor"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/card_view_three"
+        app:layout_constraintStart_toEndOf="@+id/image_inside_third_card"
+        app:layout_constraintTop_toTopOf="@+id/card_view_three" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_view_three"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/mintGreen"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/card_view_two">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/custom_add_button">
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_one"
-            android:layout_width="160dp"
-            android:layout_height="65dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="4dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_inside_first_card"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="16dp"
-            android:elevation="4dp"
-            android:src="@drawable/ic_checklist"
-            app:layout_constraintBottom_toBottomOf="@id/card_view_one"
-            app:layout_constraintLeft_toLeftOf="@id/card_view_one"
-            app:layout_constraintTop_toTopOf="@id/card_view_one" />
-
-        <TextView
-            android:id="@+id/number_todo"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:elevation="5dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            tools:text="5"
-            app:layout_constraintBottom_toBottomOf="@id/card_view_one"
-            app:layout_constraintLeft_toLeftOf="@id/card_view_one"
-            app:layout_constraintRight_toRightOf="@id/card_view_one"
-            app:layout_constraintTop_toTopOf="@id/card_view_one" />
-
-
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_two"
-            android:layout_width="160dp"
-            android:layout_height="65dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="4dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_view_one" />
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_inside_second_card"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_margin="16dp"
-            android:elevation="4dp"
-            android:src="@drawable/ic_in_progress"
-            app:layout_constraintBottom_toBottomOf="@id/card_view_two"
-            app:layout_constraintLeft_toLeftOf="@id/card_view_two"
-            app:layout_constraintTop_toTopOf="@id/card_view_two" />
-
-        <TextView
-            android:id="@+id/number_in_progress"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:elevation="5dp"
-            android:gravity="center"
-            android:textSize="24sp"
-            tools:text="5"
-            app:layout_constraintBottom_toBottomOf="@id/card_view_two"
-            app:layout_constraintLeft_toLeftOf="@id/card_view_two"
-            app:layout_constraintRight_toRightOf="@id/card_view_two"
-            app:layout_constraintTop_toTopOf="@id/card_view_two" />
-
-
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_three"
-            android:layout_width="160dp"
-            android:layout_height="65dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="4dp"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_view_two" />
-
-        <com.google.android.material.imageview.ShapeableImageView
+        <ImageView
             android:id="@+id/image_inside_third_card"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_margin="16dp"
             android:elevation="4dp"
+            app:tint="@color/homeIconsColor"
             android:src="@drawable/ic_done"
             app:layout_constraintBottom_toBottomOf="@id/card_view_three"
             app:layout_constraintLeft_toLeftOf="@id/card_view_three"
-            app:layout_constraintTop_toTopOf="@id/card_view_three" />
+            app:layout_constraintTop_toTopOf="@id/card_view_three"
+            tools:ignore="ContentDescription" />
 
         <TextView
             android:id="@+id/number_done"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:elevation="4dp"
-            android:gravity="center"
             android:textSize="24sp"
             tools:text="5"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/card_view_three"
-            app:layout_constraintLeft_toLeftOf="@id/card_view_three"
-            app:layout_constraintRight_toRightOf="@id/card_view_three"
+            app:layout_constraintEnd_toEndOf="@id/number_todo"
+            app:layout_constraintStart_toStartOf="@id/number_todo"
             app:layout_constraintTop_toTopOf="@id/card_view_three" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+<!--    pie chart  -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/home_background_linear_shape"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_view_three">
+
+        <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
+            android:id="@+id/home_pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="16dp"
-            android:background="@drawable/home_background_linear_shape"
+            android:elevation="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_view_three">
-
-            <com.github.aachartmodel.aainfographics.aachartcreator.AAChartView
-                android:id="@+id/home_pie_chart"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:elevation="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card_view_three" />
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_view_three" />
         </LinearLayout>
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

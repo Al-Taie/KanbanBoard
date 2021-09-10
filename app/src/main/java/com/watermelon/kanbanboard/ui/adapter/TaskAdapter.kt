@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -85,8 +86,7 @@ class TaskAdapter(
             arrowButton.setOnClickListener {
                 cardExpandState(binding = this)
             }
-            val colorPickList = mutableListOf(
-                colorPaletteBackground,
+            val colorPickList = listOf(
                 blueColorPicker,
                 greenColorPicker,
                 yellowColorPicker,
@@ -100,7 +100,7 @@ class TaskAdapter(
         }
     }
 
-    private fun colorPickBackground(binding: ItemTaskCardBinding, list: MutableList<View>) {
+    private fun colorPickBackground(binding: ItemTaskCardBinding, list: List<ImageButton>) {
         for(i in 1..4){
             list[i].setOnClickListener {
                 binding.taskCard.setStrokeColor(list[i].backgroundTintList)
@@ -108,14 +108,14 @@ class TaskAdapter(
         }
     }
 
-    private fun colorExpandState(list: MutableList<View>) {
+    private fun colorExpandState(list: List<ImageButton>) {
             if (list[0].visibility == View.GONE){
               list.forEach {
-                 it.slideVisibility(true, gravity = Gravity.TOP)
+                 it.slideVisibility(true, gravity = Gravity.START)
               }
             }else if (list[0].visibility == View.VISIBLE){
                 list.forEach {
-                    it.slideVisibility(false,gravity = Gravity.TOP)
+                    it.slideVisibility(false,gravity = Gravity.END)
                 }
             }
     }

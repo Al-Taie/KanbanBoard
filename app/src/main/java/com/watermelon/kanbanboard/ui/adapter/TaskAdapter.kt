@@ -1,7 +1,6 @@
 package com.watermelon.kanbanboard.ui.adapter
 
 import android.content.Context
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -85,39 +84,7 @@ class TaskAdapter(
             arrowButton.setOnClickListener {
                 cardExpandState(binding = this)
             }
-            val colorPickList = mutableListOf(
-                colorPaletteBackground,
-                blueColorPicker,
-                greenColorPicker,
-                yellowColorPicker,
-                pinkColorPicker
-            )
-
-            buttonPickColor.setOnClickListener {
-                colorExpandState(list = colorPickList)
-            }
-            colorPickBackground(binding = this , list = colorPickList)
         }
-    }
-
-    private fun colorPickBackground(binding: ItemTaskCardBinding, list: MutableList<View>) {
-        for(i in 1..4){
-            list[i].setOnClickListener {
-                binding.taskCard.setStrokeColor(list[i].backgroundTintList)
-            }
-        }
-    }
-
-    private fun colorExpandState(list: MutableList<View>) {
-            if (list[0].visibility == View.GONE){
-              list.forEach {
-                 it.slideVisibility(true, gravity = Gravity.TOP)
-              }
-            }else if (list[0].visibility == View.VISIBLE){
-                list.forEach {
-                    it.slideVisibility(false,gravity = Gravity.TOP)
-                }
-            }
     }
 
     fun setData(newList: List<Task>) {
@@ -143,7 +110,5 @@ class TaskAdapter(
                 arrowButton.setImageResource(R.drawable.ic_baseline_expand_less_24)
             }
         }
-
     }
-
 }
